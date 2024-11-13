@@ -1,17 +1,59 @@
 extends CharacterBody2D
 
-@export var speed = 400
-var gravity = 600
+@export var speed = 200
+#var gravity = 600
 
-func get_input():
-	var input_direction = Input.get_vector("left", "right", "up", "down")
+var gravity = 10
+const jumpPower = -400
+
+@onready var animationPath = $AnimatedSprite2D
+
+
+#func get_input():
+#	var input_direction = Input.get_vector("left", "right", "up", "down")
+#	velocity = input_direction * speed
 	
-	velocity = input_direction * speed
+	
 
 func _physics_process(delta):
-	get_input()	
-	velocity.y += gravity * delta
+	#get_input()	#Getting the player inputs
+	
+	##Get the player to move in left / right directions
+	var playerDirection = Input.get_axis("left","right")
+	if playerDirection:
+		velocity.x = playerDirection * speed
+	else:
+		velocity.x = move_toward(velocity.x, 0, speed) #Just slows the player so that it's a smooth motion
+	
+	##To get the player to jump
+	if not is_on_floor():
+		velocity.y += gravity #Only * delta if using rigid bodies
+		
+	if Input.is_action_just_pressed("ui_accept") && is_on_floor(): #To get the player to jump with space bar
+		velocity.y = jumpPower
+	
+	##Variable jumping, if you hold space you'll jump higher	
+	if Input.is_action_just_released("ui_accept"):
+		velocity.y *= 0.5
+		
 	move_and_slide()
+	handle_animation()
+	
+##Function to handle the animation of the player sprite
+func handle_animation():
+	if is_on_floor():
+		if velocity: #For running animation
+			pass
+		else:
+			animationPath.play("idle")
+		pass
+	else: #If jumping animation
+		pass
+	
+	
+	
+	pass
+
 
 
 # Called when the node enters the scene tree for the first time.

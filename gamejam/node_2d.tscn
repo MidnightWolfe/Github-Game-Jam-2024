@@ -1,11 +1,10 @@
-[gd_scene load_steps=13 format=4 uid="uid://bhnlrrkm28bx1"]
+[gd_scene load_steps=11 format=4 uid="uid://bhnlrrkm28bx1"]
 
 [ext_resource type="Texture2D" uid="uid://dnrsmegk57si6" path="res://Sprites/GreyGrass.png" id="1_403di"]
-[ext_resource type="Script" path="res://player.gd" id="2_7ry2s"]
 [ext_resource type="Texture2D" uid="uid://bmgoe3ubfveyy" path="res://Sprites/GreyCloud.png" id="2_fuukr"]
 [ext_resource type="Texture2D" uid="uid://y78pd8kdo1tj" path="res://Sprites/GreyBlocks.png" id="3_eyjap"]
-[ext_resource type="Texture2D" uid="uid://c2fbg0tjvussr" path="res://Sprites/Placeholder.png" id="3_uskwj"]
 [ext_resource type="Texture2D" uid="uid://6tjl30r7ycoi" path="res://Sprites/GreyBGPlants.png" id="4_k5o81"]
+[ext_resource type="PackedScene" uid="uid://bmebq4x1bgoi4" path="res://player.tscn" id="5_oddco"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nqiri"]
 resource_name = "Grey Grass"
@@ -152,9 +151,6 @@ sources/1 = SubResource("TileSetAtlasSource_2axtj")
 sources/2 = SubResource("TileSetAtlasSource_l63jy")
 sources/3 = SubResource("TileSetAtlasSource_8qoj3")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_imm38"]
-size = Vector2(19.5, 21.6667)
-
 [node name="Node2D" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -164,14 +160,5 @@ tile_set = SubResource("TileSet_60ab7")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Player" type="CharacterBody2D" parent="."]
-script = ExtResource("2_7ry2s")
-
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
-scale = Vector2(3, 3)
-texture = ExtResource("3_uskwj")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(-3.25, -0.5)
-scale = Vector2(3, 3)
-shape = SubResource("RectangleShape2D_imm38")
+[node name="Player" parent="." instance=ExtResource("5_oddco")]
+position = Vector2(1, 16)

@@ -1,0 +1,89 @@
+[gd_scene load_steps=11 format=3 uid="uid://bmebq4x1bgoi4"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_0hlg0"]
+[ext_resource type="Texture2D" uid="uid://c6pw1dkegurkk" path="res://Sprites/player.png" id="2_t0ey0"]
+[ext_resource type="Texture2D" uid="uid://bi40bxo4u51x8" path="res://Sprites/player idle.png" id="3_yko5d"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n561i"]
+atlas = ExtResource("3_yko5d")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ylr6g"]
+atlas = ExtResource("3_yko5d")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b5xcd"]
+atlas = ExtResource("3_yko5d")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d0ndl"]
+atlas = ExtResource("3_yko5d")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8jyj6"]
+atlas = ExtResource("3_yko5d")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ub2ex"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n561i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ylr6g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b5xcd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d0ndl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8jyj6")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_imm38"]
+size = Vector2(19.5, 18.3334)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_0hlg0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2.75, -2.25)
+scale = Vector2(1.85938, 1.98437)
+sprite_frames = SubResource("SpriteFrames_ub2ex")
+animation = &"idle"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(3, 3)
+texture = ExtResource("2_t0ey0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3.25, -5.50003)
+scale = Vector2(3, 3)
+shape = SubResource("RectangleShape2D_imm38")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+enabled = false
+zoom = Vector2(2.5, 2.5)
