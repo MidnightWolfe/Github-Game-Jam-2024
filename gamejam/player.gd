@@ -11,7 +11,7 @@ const jumpPower = -400
 const SPELLS = preload("res://spells.tscn")
 var is_casting_spell = false
 var combo = Vector3(0, 0, 0)
-var colour = Color()
+var colour = Color(0, 0, 0)
 
 
 #func get_input():
@@ -44,7 +44,10 @@ func _physics_process(_delta):
 	if Input.is_action_just_pressed("ui_text_submit"):
 		if is_casting_spell:
 			var greatestValue = max(combo.x, combo.y, combo.z)
-			colour = Color(combo.x / greatestValue, combo.y / greatestValue, combo.z / greatestValue)
+			if greatestValue != 0:
+				colour = Color(combo.x / greatestValue, combo.y / greatestValue, combo.z / greatestValue)
+			else:
+				colour = Color(0, 0, 0)
 			combo = Vector3(0,0,0)
 			var spell = SPELLS.instantiate()
 			spell._set_colour(colour)

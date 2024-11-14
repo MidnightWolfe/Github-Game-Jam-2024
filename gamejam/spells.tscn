@@ -193,7 +193,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"projectile",
-"speed": 60.0
+"speed": 30.0
 }]
 
 [node name="Spells" type="Area2D"]
@@ -206,5 +206,8 @@ shape = SubResource("RectangleShape2D_0wjn4")
 [node name="VisibleOnScreenNotifier2D2" type="VisibleOnScreenNotifier2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_fqgrt")
 animation = &"projectile"
+frame = 17
+frame_progress = 0.971075
