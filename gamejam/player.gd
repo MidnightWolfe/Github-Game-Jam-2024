@@ -37,22 +37,25 @@ func _physics_process(delta):
 		velocity.y *= 0.5
 		
 	move_and_slide()
-	handle_animation()
+	handle_animation(playerDirection)
 	
 ##Function to handle the animation of the player sprite
-func handle_animation():
+func handle_animation(playerDirection):
+	handle_animation_flip(playerDirection)
 	if is_on_floor():
 		if velocity: #For running animation
-			pass
+			animationPath.play("run")
 		else:
 			animationPath.play("idle")
-		pass
 	else: #If jumping animation
-		pass
-	
-	
-	
-	pass
+		animationPath.play("jump")
+
+##Function to handle the animation flip in direction
+func handle_animation_flip(playerDirection):
+	if playerDirection == 1:
+		animationPath.flip_h = false #Do not flip in the right direction
+	elif playerDirection == -1:
+		animationPath.flip_h = true #Flip in the left direction
 
 
 
