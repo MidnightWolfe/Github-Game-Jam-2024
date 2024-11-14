@@ -20,7 +20,7 @@ var colour = Color()
 	
 	
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	#get_input()	#Getting the player inputs
 	
 	##Get the player to move in left / right directions
@@ -86,5 +86,5 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
