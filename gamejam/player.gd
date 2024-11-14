@@ -8,6 +8,11 @@ const jumpPower = -400
 
 @onready var animationPath = $AnimatedSprite2D
 
+const SPELLS = preload("res://spells.tscn")
+var is_casting_spell = false
+var combo = Vector3(0, 0, 0)
+var colour = Color()
+
 
 #func get_input():
 #	var input_direction = Input.get_vector("left", "right", "up", "down")
@@ -29,13 +34,32 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity #Only * delta if using rigid bodies
 		
-	if Input.is_action_just_pressed("ui_accept") && is_on_floor(): #To get the player to jump with space bar
+	if Input.is_action_just_pressed("ui_select") && is_on_floor(): #To get the player to jump with space bar
 		velocity.y = jumpPower
 	
 	##Variable jumping, if you hold space you'll jump higher	
-	if Input.is_action_just_released("ui_accept"):
+	if Input.is_action_just_released("ui_select"):
 		velocity.y *= 0.5
-		
+	
+	if Input.is_action_just_pressed("ui_text_submit"):
+		if is_casting_spell:
+			var greatestValue = max(combo.x, combo.y, combo.z)
+			colour = Color(combo.x / greatestValue, combo.y / greatestValue, combo.z / greatestValue)
+			combo = Vector3(0,0,0)
+			var spell = SPELLS.instantiate()
+			spell._set_colour(colour)
+			get_parent().add_child(spell)
+			spell.position = $".".global_position
+		is_casting_spell = not is_casting_spell
+	
+	if is_casting_spell:
+		if Input.is_action_just_pressed("left"):
+			combo.x = combo.x + 1.0
+		if Input.is_action_just_pressed("up"):
+			combo.y = combo.y + 1.0
+		if Input.is_action_just_pressed("right"):
+			combo.z = combo.z + 1.0
+	
 	move_and_slide()
 	handle_animation()
 	
