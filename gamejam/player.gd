@@ -1,15 +1,12 @@
 extends CharacterBody2D
-###Global variables
-@export var speed = 200
 
-##Basic jump / gravity variables
+@export var speed = 200
+#var gravity = 600
+
 var gravity = 10
 const jumpPower = -400
 
-##Double jump variables
-var jumpCount = 0
-var maxJumpCount = 2
-
+@onready var animationPath = $AnimatedSprite2D
 
 const SPELLS = preload("res://spells.tscn")
 var is_casting_spell = false
@@ -18,83 +15,64 @@ var colour = Color(0, 0, 0)
 
 var lastDirection = 1
 
-##Dash variables
-const dashSpeed = 500
-var dashing = false
-var canDash = true
 
-@onready var animationPath = $AnimatedSprite2D
+#func get_input():
+#	var input_direction = Input.get_vector("left", "right", "up", "down")
+#	velocity = input_direction * speed
+	
+	
 
-##Function to get player inputs
-func get_input():
+func _physics_process(_delta):
+	#get_input()	#Getting the player inputs
+	
 	##Get the player to move in left / right directions
 	var playerDirection = Input.get_axis("left","right")
-	if playerDirection:
-		if dashing:
-			velocity.x = playerDirection * dashSpeed
-		else:
-			velocity.x = playerDirection * speed
+	if playerDirection != 0:
+		velocity.x = playerDirection * speed
+		directSprite(playerDirection)
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed) #Just slows the player so that it's a smooth motion
-	
-	##Setting dash to true if shift is pressed and setting a timer
-	if Input.is_action_just_pressed("dash") and canDash:
-		dashing = true
-		canDash = false
-		$DashTimer.start()
-		$DashAgainTimer.start()
 	
 	##To get the player to jump
 	if not is_on_floor():
 		velocity.y += gravity #Only * delta if using rigid bodies
-	
-	if is_on_floor():
-		jumpCount = 0
 		
-
-	if Input.is_action_just_pressed("ui_accept") && jumpCount < maxJumpCount: #To get the player to jump with space bar and double jump
+	if Input.is_action_just_pressed("ui_select") && is_on_floor(): #To get the player to jump with space bar
 		velocity.y = jumpPower
-		jumpCount += 1
-	
-		
 	
 	##Variable jumping, if you hold space you'll jump higher	
 	if Input.is_action_just_released("ui_select"):
 		velocity.y *= 0.5
-
-	handle_animation(playerDirection)
-
-func _physics_process(delta):
-	get_input()	
+	
 	move_and_slide()
+	handle_animation()
 	
-	
-##Make the player stop dashing
-func _on_dash_timer_timeout() -> void:
-	dashing = false
-
-func _on_dash_again_timer_timeout() -> void:
-	canDash = true
-	pass # Replace with function body.
-
 ##Function to handle the animation of the player sprite
-func handle_animation(playerDirection):
-	handle_animation_flip(playerDirection)
+func handle_animation():
 	if is_on_floor():
 		if velocity: #For running animation
-			animationPath.play("run")
+			pass
 		else:
 			animationPath.play("idle")
+		pass
 	else: #If jumping animation
-		animationPath.play("jump")
+		pass
+	
+	
+	
+	pass
+	
+# Take in an input of direction Left | Right and scale the sprite to flip it
+func directSprite(direction: float) -> void:
+	if direction < 0 and lastDirection != -1:
+		scale.x = -1
+		lastDirection = -1
+	elif direction > 0 and lastDirection != 1:
+		scale.x = -1
+		lastDirection = 1
+	
+	pass
 
-
-##Function to handle the animation flip in direction
-func handle_animation_flip(playerDirection):
-	if playerDirection == 1:
-		animationPath.flip_h = false #Do not flip in the right direction
-	elif playerDirection == -1:
-		animationPath.flip_h = true #Flip in the left direction
 
 
 # Called when the node enters the scene tree for the first time.
