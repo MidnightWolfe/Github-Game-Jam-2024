@@ -6,23 +6,23 @@
 [ext_resource type="Texture2D" uid="uid://r2engir7n1kh" path="res://Sprites/jump.png" id="4_y3hth"]
 [ext_resource type="Texture2D" uid="uid://dd8gjimghtua5" path="res://Sprites/player run.png" id="5_k3e25"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_n561i"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_q2qrx"]
 atlas = ExtResource("3_yko5d")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ylr6g"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_kt7j4"]
 atlas = ExtResource("3_yko5d")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_b5xcd"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_p12vm"]
 atlas = ExtResource("3_yko5d")
 region = Rect2(0, 32, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d0ndl"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_o6ib8"]
 atlas = ExtResource("3_yko5d")
 region = Rect2(32, 32, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8jyj6"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_s418o"]
 atlas = ExtResource("3_yko5d")
 region = Rect2(0, 64, 32, 32)
 
@@ -71,19 +71,19 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_n561i")
+"texture": SubResource("AtlasTexture_q2qrx")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ylr6g")
+"texture": SubResource("AtlasTexture_kt7j4")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_b5xcd")
+"texture": SubResource("AtlasTexture_p12vm")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_d0ndl")
+"texture": SubResource("AtlasTexture_o6ib8")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8jyj6")
+"texture": SubResource("AtlasTexture_s418o")
 }],
 "loop": true,
 "name": &"idle",
@@ -137,7 +137,7 @@ script = ExtResource("1_0hlg0")
 position = Vector2(-2.75, -2.25)
 scale = Vector2(1.85938, 1.98437)
 sprite_frames = SubResource("SpriteFrames_ub2ex")
-animation = &"attack"
+animation = &"idle"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
