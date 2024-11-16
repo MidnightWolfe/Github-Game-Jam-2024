@@ -87,20 +87,19 @@ func _process(_delta: float) -> void:
 			var greatestValue = max(combo.x, combo.y, combo.z)
 			if greatestValue != 0:
 				colour = Color(combo.x / greatestValue, combo.y / greatestValue, combo.z / greatestValue)
-			else:
-				colour = Color(0, 0, 0)
 			combo = Vector3(0,0,0)
 			var spell = SPELLS.instantiate()
 			spell._set_colour(colour)
+			spell._set_direction(lastDirection)
 			get_parent().add_child(spell)
 			spell.position = $".".global_position
 		is_casting_spell = not is_casting_spell
 	
 	if is_casting_spell:
-		if Input.is_action_just_pressed("left"):
+		if Input.is_action_just_pressed("1"):
 			combo.x = combo.x + 1.0
-		if Input.is_action_just_pressed("up"):
+		if Input.is_action_just_pressed("2"):
 			combo.y = combo.y + 1.0
-		if Input.is_action_just_pressed("right"):
+		if Input.is_action_just_pressed("3"):
 			combo.z = combo.z + 1.0
 	pass
