@@ -10,18 +10,11 @@ const jumpPower = -400
 var jumpCount = 0
 var maxJumpCount = 2
 
-
-const SPELLS = preload("res://spells.tscn")
-var is_casting_spell = false
-var combo = Vector3(0, 0, 0)
-var colour = Color(0, 0, 0)
-
-var lastDirection = 1
-
 ##Dash variables
 const dashSpeed = 500
 var dashing = false
 var canDash = true
+
 
 @onready var animationPath = $AnimatedSprite2D
 
@@ -51,7 +44,6 @@ func get_input():
 	if is_on_floor():
 		jumpCount = 0
 		
-
 	if Input.is_action_just_pressed("ui_accept") && jumpCount < maxJumpCount: #To get the player to jump with space bar and double jump
 		velocity.y = jumpPower
 		jumpCount += 1
@@ -59,9 +51,8 @@ func get_input():
 		
 	
 	##Variable jumping, if you hold space you'll jump higher	
-	if Input.is_action_just_released("ui_select"):
+	if Input.is_action_just_released("ui_accept"):
 		velocity.y *= 0.5
-
 	handle_animation(playerDirection)
 
 func _physics_process(delta):
@@ -88,7 +79,6 @@ func handle_animation(playerDirection):
 	else: #If jumping animation
 		animationPath.play("jump")
 
-
 ##Function to handle the animation flip in direction
 func handle_animation_flip(playerDirection):
 	if playerDirection == 1:
@@ -103,25 +93,5 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("ui_text_submit"):
-		if is_casting_spell:
-			var greatestValue = max(combo.x, combo.y, combo.z)
-			if greatestValue != 0:
-				colour = Color(combo.x / greatestValue, combo.y / greatestValue, combo.z / greatestValue)
-			combo = Vector3(0,0,0)
-			var spell = SPELLS.instantiate()
-			spell._set_colour(colour)
-			spell._set_direction(lastDirection)
-			get_parent().add_child(spell)
-			spell.position = $".".global_position
-		is_casting_spell = not is_casting_spell
-	
-	if is_casting_spell:
-		if Input.is_action_just_pressed("1"):
-			combo.x = combo.x + 1.0
-		if Input.is_action_just_pressed("2"):
-			combo.y = combo.y + 1.0
-		if Input.is_action_just_pressed("3"):
-			combo.z = combo.z + 1.0
+func _process(delta: float) -> void:
 	pass
