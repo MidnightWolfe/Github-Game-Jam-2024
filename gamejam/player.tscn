@@ -149,6 +149,11 @@ position = Vector2(-3.25, -5.50003)
 scale = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_imm38")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-enabled = false
-zoom = Vector2(2.5, 2.5)
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="DashAgainTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="DashAgainTimer" to="." method="_on_dash_again_timer_timeout"]

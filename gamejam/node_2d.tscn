@@ -159,6 +159,11 @@ tile_map_data = PackedByteArray("AAD7/wIAAAAAAAAAAAD8/wIAAAABAAAAAAD8/wMAAAABAAE
 tile_set = SubResource("TileSet_60ab7")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+enabled = false
 
 [node name="Player" parent="." instance=ExtResource("5_oddco")]
 position = Vector2(1, 16)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+limit_bottom = 400
+limit_smoothed = true
