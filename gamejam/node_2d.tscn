@@ -180,3 +180,6 @@ zoom = Vector2(2, 2)
 [node name="SpellParticles" type="GPUParticles2D" parent="."]
 process_material = SubResource("ParticleProcessMaterial_xkcp3")
 explosiveness = 0.87
+
+
+
