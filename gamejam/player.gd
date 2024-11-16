@@ -14,10 +14,20 @@ var maxJumpCount = 2
 const dashSpeed = 500
 var dashing = false
 var canDash = true
-
-
+##Markus Code
+const SPELLS = preload("res://spells.tscn")
+var is_casting_spell = false
+var combo = Vector3(0, 0, 0)
+var colour = Color(0, 0, 0)
 @onready var animationPath = $AnimatedSprite2D
 
+var lastDirection = 1
+##M
+func _physics_process(delta):
+	get_input()	
+	move_and_slide()
+	
+	
 ##Function to get player inputs
 func get_input():
 	##Get the player to move in left / right directions
@@ -27,6 +37,7 @@ func get_input():
 			velocity.x = playerDirection * dashSpeed
 		else:
 			velocity.x = playerDirection * speed
+			directSprite(playerDirection)
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed) #Just slows the player so that it's a smooth motion
 	
@@ -44,22 +55,26 @@ func get_input():
 	if is_on_floor():
 		jumpCount = 0
 		
-	if Input.is_action_just_pressed("ui_accept") && jumpCount < maxJumpCount: #To get the player to jump with space bar and double jump
+	if Input.is_action_just_pressed("space") && jumpCount < maxJumpCount: #To get the player to jump with space bar and double jump
 		velocity.y = jumpPower
 		jumpCount += 1
 	
 		
 	
 	##Variable jumping, if you hold space you'll jump higher	
-	if Input.is_action_just_released("ui_accept"):
+	if Input.is_action_just_released("space"):
 		velocity.y *= 0.5
 	handle_animation(playerDirection)
 
-func _physics_process(delta):
-	get_input()	
-	move_and_slide()
+
+func directSprite(direction: float) -> void:
+	if direction < 0 and lastDirection != -1:
+		lastDirection = -1
+	elif direction > 0 and lastDirection != 1:
+		lastDirection = 1
 	
-	
+	pass
+
 ##Make the player stop dashing
 func _on_dash_timer_timeout() -> void:
 	dashing = false
@@ -94,4 +109,25 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("enter"):
+		if is_casting_spell:
+			var greatestValue = max(combo.x, combo.y, combo.z)
+			if greatestValue != 0:
+				colour = Color(combo.x / greatestValue, combo.y / greatestValue, combo.z / greatestValue)
+			combo = Vector3(0,0,0)
+			var spell = SPELLS.instantiate()
+			spell._set_colour(colour)
+			spell._set_direction(lastDirection)
+			get_parent().add_child(spell)
+			spell.position = $".".global_position
+		is_casting_spell = not is_casting_spell
+	
+	if is_casting_spell:
+		if Input.is_action_just_pressed("1"):
+			combo.x = combo.x + 1.0
+		if Input.is_action_just_pressed("2"):
+			combo.y = combo.y + 1.0
+		if Input.is_action_just_pressed("3"):
+			combo.z = combo.z + 1.0
+
 	pass
