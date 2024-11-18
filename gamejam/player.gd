@@ -21,12 +21,23 @@ var combo = Vector3(0, 0, 0)
 var colour = Color(0, 0, 0)
 @onready var animationPath = $AnimatedSprite2D
 
+##Player Attack/HitBox
+var enemyInAttackRange = false
+var enemyAttackCooldown = true
+var health = 10  #Player currently has 10 hit points (HP)
+var IsPlayerAlive = true
+
 var lastDirection = 1
 ##M
 func _physics_process(delta):
 	get_input()	
 	move_and_slide()
-	
+	enemy_attack()
+	if health <= 0:
+		IsPlayerAlive = false
+		health = 0
+		print("Player has been unalived")
+		self.queue_free() #This makes the player disappear - this needs to be changed so that the player respawns after death
 	
 ##Function to get player inputs
 func get_input():
@@ -129,5 +140,29 @@ func _process(delta: float) -> void:
 			combo.y = combo.y + 1.0
 		if Input.is_action_just_pressed("3"):
 			combo.z = combo.z + 1.0
-
 	pass
+
+## This is currently used to determine if the player is in the enemy hitbox
+func player():
+	pass
+
+func _on_player_hit_box_body_entered(body: Node2D) -> void:
+	if body.has_method("enemy"):
+		enemyInAttackRange = true
+
+func _on_player_hit_box_body_exited(body: Node2D) -> void:
+	if body.has_method("enemy"):
+		enemyInAttackRange = false
+
+##Functions that happen while the enemy is attacking
+#This is set up so that when the enemy touches the player, the player is "attacked".
+func enemy_attack():
+	if enemyInAttackRange and enemyAttackCooldown == true:
+		health = health - 1
+		enemyAttackCooldown = false
+		$Attack_Cooldown_Timer.start()
+		print("Player took -1 damage")
+		print(health)
+
+func _on_attack_cooldown_timer_timeout() -> void:
+	enemyAttackCooldown = true
