@@ -32,6 +32,7 @@ var lastDirection = 1
 func _physics_process(delta):
 	get_input()	
 	move_and_slide()
+	
 	enemy_attack()
 	if health <= 0:
 		IsPlayerAlive = false
@@ -157,7 +158,7 @@ func _on_player_hit_box_body_exited(body: Node2D) -> void:
 ##Functions that happen while the enemy is attacking
 #This is set up so that when the enemy touches the player, the player is "attacked".
 func enemy_attack():
-	if enemyInAttackRange and enemyAttackCooldown == true:
+	if enemyInAttackRange and enemyAttackCooldown:
 		health = health - 1
 		enemyAttackCooldown = false
 		$Attack_Cooldown_Timer.start()

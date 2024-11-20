@@ -11,19 +11,24 @@ var player = null
 
 var playerInAttackRange = false
 var playerAttackCooldown = true
-var health = 1  #Enemies are currently one hit
+var health = 5  #Enemies are currently one hit
 var IsEnemyAlive = true
 
 func _ready() -> void:
 	$Enemy_Animation.play("enemy") #The animation that causes the enemy to walk back and forth
+	$Bad_Guy_Animated.play("red_walking")
 
 func _physics_process(delta: float) -> void:
-	player_attack()
+	#player_attack()
 	if health <= 0:
 		IsEnemyAlive = false
 		health = 0
+		#_deadEnemy()
 		print("Enemy has been unalived")
 		self.queue_free() #This makes the enemy disappear - there are currently no (death) animations
+
+func _deadEnemy(): # This will be used to signal the animation when the enmy dies (to be built)
+	pass
 
 ## This is currently used to determine if the enemy is in the player hitbox
 func enemy():
@@ -40,7 +45,7 @@ func _on_enemy_hit_box_body_exited(body: Node2D) -> void:
 ##Functions that happen while the player is attacking
 #This is currently set up so that when the player touches the enemy, the enemy is "attacked". This should be changed to the spell mechanics
 func player_attack():
-	if playerInAttackRange and playerAttackCooldown == true:
+	if playerInAttackRange and playerAttackCooldown:
 		health = health - 1
 		playerAttackCooldown = false
 		$Attack_Cooldown_Timer.start()
