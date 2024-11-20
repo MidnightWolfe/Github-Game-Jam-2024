@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://bhnlrrkm28bx1"]
+[gd_scene load_steps=19 format=4 uid="uid://bhnlrrkm28bx1"]
 
 [ext_resource type="Texture2D" uid="uid://dnrsmegk57si6" path="res://Sprites/GreyGrass.png" id="1_403di"]
 [ext_resource type="Texture2D" uid="uid://bmgoe3ubfveyy" path="res://Sprites/GreyCloud.png" id="2_fuukr"]
@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://6tjl30r7ycoi" path="res://Sprites/GreyBGPlants.png" id="4_k5o81"]
 [ext_resource type="PackedScene" uid="uid://bmebq4x1bgoi4" path="res://player.tscn" id="5_oddco"]
 [ext_resource type="PackedScene" uid="uid://bm76in6mxgs34" path="res://red_enemy.tscn" id="6_gypb1"]
+[ext_resource type="Script" path="res://player_health_bar.gd" id="7_ojpul"]
+[ext_resource type="Texture2D" uid="uid://cwm1sk52d26rk" path="res://Sprites/health back.png" id="8_p31ef"]
+[ext_resource type="Texture2D" uid="uid://bmkopq48eahae" path="res://Sprites/health front.png" id="9_5uxbn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nqiri"]
 resource_name = "Grey Grass"
@@ -228,3 +231,27 @@ position = Vector2(116, 24)
 libraries = {
 "": SubResource("AnimationLibrary_imlir")
 }
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PlayerHealthBar" type="ProgressBar" parent="CanvasLayer"]
+visible = false
+offset_right = 158.0
+offset_bottom = 27.0
+max_value = 30.0
+value = 30.0
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer" node_paths=PackedStringArray("player")]
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(3.5, 3.5)
+max_value = 30.0
+value = 30.0
+stretch_margin_left = 4
+stretch_margin_top = 4
+stretch_margin_right = 4
+stretch_margin_bottom = 4
+texture_under = ExtResource("8_p31ef")
+texture_progress = ExtResource("9_5uxbn")
+script = ExtResource("7_ojpul")
+player = NodePath("../../Player")

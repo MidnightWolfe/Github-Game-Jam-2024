@@ -1,5 +1,10 @@
 extends CharacterBody2D
 ###Global variables
+
+class_name Player
+
+signal healthChanged
+
 @export var speed = 200
 
 ##Basic jump / gravity variables
@@ -24,7 +29,11 @@ var colour = Color(0, 0, 0)
 ##Player Attack/HitBox
 var enemyInAttackRange = false
 var enemyAttackCooldown = true
-var health = 10  #Player currently has 10 hit points (HP)
+#@export var health = 30
+
+@export var maxHealth = 30  #Player currently has 30 hit points (HP)
+@onready var currentHealth: int = maxHealth #Tracking the current health of the player
+
 var IsPlayerAlive = true
 
 var lastDirection = 1
@@ -34,11 +43,12 @@ func _physics_process(delta):
 	move_and_slide()
 	
 	enemy_attack()
-	if health <= 0:
+	if currentHealth <= 0: #Current Health
 		IsPlayerAlive = false
-		health = 0
-		print("Player has been unalived")
-		self.queue_free() #This makes the player disappear - this needs to be changed so that the player respawns after death
+		currentHealth = 0 #Current health
+		print("Player has been killed")
+		#self.queue_free()#This makes the player disappear - this needs to be changed so that the player respawns after death
+		get_tree().reload_current_scene() #This restarts the scene upon player death
 	
 ##Function to get player inputs
 func get_input():
@@ -158,12 +168,15 @@ func _on_player_hit_box_body_exited(body: Node2D) -> void:
 ##Functions that happen while the enemy is attacking
 #This is set up so that when the enemy touches the player, the player is "attacked".
 func enemy_attack():
-	if enemyInAttackRange and enemyAttackCooldown:
-		health = health - 1
+	if enemyInAttackRange and enemyAttackCooldown == true:
+		currentHealth = currentHealth - 5 #Enemy damage
+		healthChanged.emit()
+
 		enemyAttackCooldown = false
 		$Attack_Cooldown_Timer.start()
 		print("Player took -1 damage")
-		print(health)
+		print(currentHealth)
+
 
 func _on_attack_cooldown_timer_timeout() -> void:
 	enemyAttackCooldown = true

@@ -23,8 +23,10 @@ func _physics_process(delta: float) -> void:
 	if health <= 0:
 		IsEnemyAlive = false
 		health = 0
+		print("Enemy has been killed")
 		#_deadEnemy()
-		print("Enemy has been unalived")
+	
+
 		self.queue_free() #This makes the enemy disappear - there are currently no (death) animations
 
 func _deadEnemy(): # This will be used to signal the animation when the enmy dies (to be built)

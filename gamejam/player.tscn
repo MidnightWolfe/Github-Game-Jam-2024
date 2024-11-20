@@ -127,8 +127,11 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_imm38"]
+size = Vector2(15.3333, 17)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_gqfqa"]
-radius = 31.0161
+radius = 26.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_imm38"]
 size = Vector2(19.5, 18.3334)
@@ -156,7 +159,7 @@ scale = Vector2(3, 3)
 texture = ExtResource("2_t0ey0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-3.25, -5.50003)
+position = Vector2(-3, -3.49996)
 scale = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_imm38")
 
