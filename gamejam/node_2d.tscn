@@ -1,12 +1,21 @@
-[gd_scene load_steps=15 format=4 uid="uid://bhnlrrkm28bx1"]
+
+[gd_scene load_steps=19 format=4 uid="uid://bhnlrrkm28bx1"]
+
 
 [ext_resource type="Texture2D" uid="uid://dnrsmegk57si6" path="res://Sprites/GreyGrass.png" id="1_403di"]
 [ext_resource type="Texture2D" uid="uid://bmgoe3ubfveyy" path="res://Sprites/GreyCloud.png" id="2_fuukr"]
 [ext_resource type="Texture2D" uid="uid://y78pd8kdo1tj" path="res://Sprites/GreyBlocks.png" id="3_eyjap"]
 [ext_resource type="Texture2D" uid="uid://6tjl30r7ycoi" path="res://Sprites/GreyBGPlants.png" id="4_k5o81"]
 [ext_resource type="PackedScene" uid="uid://bmebq4x1bgoi4" path="res://player.tscn" id="5_oddco"]
+
 [ext_resource type="Script" path="res://sign.gd" id="6_hq0g3"]
 [ext_resource type="Texture2D" uid="uid://047ypkd6s2hj" path="res://Sprites/sign.png" id="7_b5da3"]
+
+[ext_resource type="PackedScene" uid="uid://bm76in6mxgs34" path="res://red_enemy.tscn" id="6_gypb1"]
+[ext_resource type="Script" path="res://player_health_bar.gd" id="7_ojpul"]
+[ext_resource type="Texture2D" uid="uid://cwm1sk52d26rk" path="res://Sprites/health back.png" id="8_p31ef"]
+[ext_resource type="Texture2D" uid="uid://bmkopq48eahae" path="res://Sprites/health front.png" id="9_5uxbn"]
+
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nqiri"]
 resource_name = "Grey Grass"
@@ -164,8 +173,48 @@ gravity = Vector3(0, 0, 0)
 scale_min = 2.0
 scale_max = 2.0
 
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4v6jm"]
 size = Vector2(53, 43)
+
+[sub_resource type="Animation" id="Animation_c3jmx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_l1a4p"]
+resource_name = "enemy"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(133, 24), Vector2(250, 24), Vector2(133, 24)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_imlir"]
+_data = {
+"RESET": SubResource("Animation_c3jmx"),
+"enemy": SubResource("Animation_l1a4p")
+}
+
 
 [node name="Node2D" type="Node2D"]
 
@@ -188,6 +237,7 @@ limit_smoothed = true
 [node name="SpellParticles" type="GPUParticles2D" parent="."]
 process_material = SubResource("ParticleProcessMaterial_jtdni")
 
+
 [node name="Sign" type="StaticBody2D" parent="."]
 z_index = -1
 position = Vector2(155, 53)
@@ -207,3 +257,36 @@ shape = SubResource("RectangleShape2D_4v6jm")
 [connection signal="area_entered" from="Sign/Area2D" to="Sign" method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Sign/Area2D" to="Sign" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Sign/Area2D" to="Sign" method="_on_area_2d_body_exited"]
+
+[node name="Red_Enemy" parent="." instance=ExtResource("6_gypb1")]
+position = Vector2(116, 24)
+
+[node name="Enemy_Animation" type="AnimationPlayer" parent="Red_Enemy"]
+libraries = {
+"": SubResource("AnimationLibrary_imlir")
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PlayerHealthBar" type="ProgressBar" parent="CanvasLayer"]
+visible = false
+offset_right = 158.0
+offset_bottom = 27.0
+max_value = 30.0
+value = 30.0
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer" node_paths=PackedStringArray("player")]
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(3.5, 3.5)
+max_value = 30.0
+value = 30.0
+stretch_margin_left = 4
+stretch_margin_top = 4
+stretch_margin_right = 4
+stretch_margin_bottom = 4
+texture_under = ExtResource("8_p31ef")
+texture_progress = ExtResource("9_5uxbn")
+script = ExtResource("7_ojpul")
+player = NodePath("../../Player")
+

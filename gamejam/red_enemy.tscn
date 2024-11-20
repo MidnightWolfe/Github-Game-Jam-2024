@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://bm76in6mxgs34"]
+
+[ext_resource type="Script" path="res://enemy.gd" id="1_ddthi"]
+[ext_resource type="Texture2D" uid="uid://6fd5il1fqdnj" path="res://Sprites/(1)red_bad_guy_pixel.png" id="4_iq4o3"]
+[ext_resource type="Texture2D" uid="uid://4gsoub23b2so" path="res://Sprites/(2)red_bad_guy_pixel.png" id="5_u4x8k"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u5y1d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_iq4o3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_u4x8k")
+}],
+"loop": true,
+"name": &"red_walking",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vl32j"]
+size = Vector2(94, 49)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8aop0"]
+size = Vector2(84, 49)
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_ddthi")
+
+[node name="Bad_Guy_Animated" type="AnimatedSprite2D" parent="."]
+position = Vector2(4.76837e-07, 5.04871e-29)
+scale = Vector2(0.754, 0.75)
+sprite_frames = SubResource("SpriteFrames_u5y1d")
+animation = &"red_walking"
+
+[node name="Enemy_HitBox" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="HitBox_Area" type="CollisionShape2D" parent="Enemy_HitBox"]
+position = Vector2(1, -0.5)
+shape = SubResource("RectangleShape2D_vl32j")
+
+[node name="Stage_Dectection_Area" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_8aop0")
+
+[node name="Attack_Cooldown_Timer" type="Timer" parent="."]
+wait_time = 0.25
+
+[connection signal="body_entered" from="Enemy_HitBox" to="." method="_on_enemy_hit_box_body_entered"]
+[connection signal="body_exited" from="Enemy_HitBox" to="." method="_on_enemy_hit_box_body_exited"]
+[connection signal="timeout" from="Attack_Cooldown_Timer" to="." method="_on_attack_cooldown_timer_timeout"]
