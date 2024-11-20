@@ -22,7 +22,7 @@ func _physics_process(delta: float) -> void:
 	if health <= 0:
 		IsEnemyAlive = false
 		health = 0
-		print("Enemy has been unalived")
+		print("Enemy has been killed")
 		self.queue_free() #This makes the enemy disappear - there are currently no (death) animations
 
 ## This is currently used to determine if the enemy is in the player hitbox
