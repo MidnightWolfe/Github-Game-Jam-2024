@@ -35,8 +35,8 @@ func _process(delta: float) -> void:
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vl32j"]
 size = Vector2(94, 54)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8aop0"]
-size = Vector2(72, 50)
+[sub_resource type="CircleShape2D" id="CircleShape2D_an4cd"]
+radius = 23.0217
 
 [node name="Enemy_Red" type="CharacterBody2D"]
 collision_layer = 2
@@ -58,8 +58,8 @@ position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_vl32j")
 
 [node name="Stage_Dectection_Area" type="CollisionShape2D" parent="."]
-visible = false
-shape = SubResource("RectangleShape2D_8aop0")
+position = Vector2(1, 0)
+shape = SubResource("CircleShape2D_an4cd")
 
 [node name="Attack_Cooldown_Timer" type="Timer" parent="."]
 wait_time = 0.25

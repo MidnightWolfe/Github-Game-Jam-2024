@@ -21,8 +21,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5e0n1"]
 size = Vector2(94, 54)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1o72e"]
-size = Vector2(72, 50)
+[sub_resource type="CircleShape2D" id="CircleShape2D_qogyg"]
+radius = 22.0227
 
 [node name="Enemy_Blue" type="CharacterBody2D"]
 script = ExtResource("1_2o8cy")
@@ -33,7 +33,7 @@ scale = Vector2(0.754, 0.75)
 sprite_frames = SubResource("SpriteFrames_qkcx5")
 animation = &"blue_walking"
 autoplay = "blue_walking"
-frame_progress = 0.85601
+frame_progress = 0.154124
 
 [node name="Enemy_HitBox" type="Area2D" parent="."]
 collision_layer = 2
@@ -44,8 +44,8 @@ position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_5e0n1")
 
 [node name="Stage_Dectection_Area" type="CollisionShape2D" parent="."]
-visible = false
-shape = SubResource("RectangleShape2D_1o72e")
+position = Vector2(1, 0)
+shape = SubResource("CircleShape2D_qogyg")
 
 [node name="Attack_Cooldown_Timer" type="Timer" parent="."]
 wait_time = 0.25
