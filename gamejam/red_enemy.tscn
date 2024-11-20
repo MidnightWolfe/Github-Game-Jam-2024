@@ -1,7 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://bm76in6mxgs34"]
+[gd_scene load_steps=7 format=3 uid="uid://bm76in6mxgs34"]
 
-[ext_resource type="Texture2D" uid="uid://ilv5y37tq1bc" path="res://Sprites/red_bad_guy_demo1.png" id="1_34bgd"]
 [ext_resource type="Script" path="res://enemy.gd" id="1_ddthi"]
+[ext_resource type="Texture2D" uid="uid://6fd5il1fqdnj" path="res://Sprites/(1)red_bad_guy_pixel.png" id="4_iq4o3"]
+[ext_resource type="Texture2D" uid="uid://4gsoub23b2so" path="res://Sprites/(2)red_bad_guy_pixel.png" id="5_u4x8k"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u5y1d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_iq4o3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_u4x8k")
+}],
+"loop": true,
+"name": &"red_walking",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vl32j"]
 size = Vector2(94, 49)
@@ -10,11 +25,14 @@ size = Vector2(94, 49)
 size = Vector2(84, 49)
 
 [node name="Enemy" type="CharacterBody2D"]
+collision_layer = 2
 script = ExtResource("1_ddthi")
 
-[node name="Bad_Guy_Sprite" type="Sprite2D" parent="."]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_34bgd")
+[node name="Bad_Guy_Animated" type="AnimatedSprite2D" parent="."]
+position = Vector2(4.76837e-07, 5.04871e-29)
+scale = Vector2(0.754, 0.75)
+sprite_frames = SubResource("SpriteFrames_u5y1d")
+animation = &"red_walking"
 
 [node name="Enemy_HitBox" type="Area2D" parent="."]
 collision_layer = 2

@@ -41,6 +41,7 @@ var lastDirection = 1
 func _physics_process(delta):
 	get_input()	
 	move_and_slide()
+	
 	enemy_attack()
 	if currentHealth <= 0: #Current Health
 		IsPlayerAlive = false
@@ -170,6 +171,7 @@ func enemy_attack():
 	if enemyInAttackRange and enemyAttackCooldown == true:
 		currentHealth = currentHealth - 5 #Enemy damage
 		healthChanged.emit()
+
 		enemyAttackCooldown = false
 		$Attack_Cooldown_Timer.start()
 		print("Player took -1 damage")

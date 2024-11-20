@@ -133,7 +133,11 @@ size = Vector2(15.3333, 17)
 [sub_resource type="CircleShape2D" id="CircleShape2D_gqfqa"]
 radius = 26.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_imm38"]
+size = Vector2(19.5, 18.3334)
+
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 3
 script = ExtResource("1_0hlg0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -141,6 +145,13 @@ position = Vector2(-2.75, -2.25)
 scale = Vector2(1.85938, 1.98437)
 sprite_frames = SubResource("SpriteFrames_ub2ex")
 animation = &"idle"
+
+[node name="Player_HitBox" type="Area2D" parent="."]
+collision_layer = 3
+
+[node name="HitBox" type="CollisionShape2D" parent="Player_HitBox"]
+position = Vector2(-4, -1)
+shape = SubResource("CircleShape2D_gqfqa")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
@@ -158,18 +169,11 @@ wait_time = 0.5
 [node name="DashAgainTimer" type="Timer" parent="."]
 wait_time = 0.5
 
-[node name="Player_HitBox" type="Area2D" parent="."]
-collision_layer = 2
-
-[node name="HitBox" type="CollisionShape2D" parent="Player_HitBox"]
-position = Vector2(-4, -1)
-shape = SubResource("CircleShape2D_gqfqa")
-
 [node name="Attack_Cooldown_Timer" type="Timer" parent="."]
 wait_time = 0.5
 
-[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
-[connection signal="timeout" from="DashAgainTimer" to="." method="_on_dash_again_timer_timeout"]
 [connection signal="body_entered" from="Player_HitBox" to="." method="_on_player_hit_box_body_entered"]
 [connection signal="body_exited" from="Player_HitBox" to="." method="_on_player_hit_box_body_exited"]
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="DashAgainTimer" to="." method="_on_dash_again_timer_timeout"]
 [connection signal="timeout" from="Attack_Cooldown_Timer" to="." method="_on_attack_cooldown_timer_timeout"]
