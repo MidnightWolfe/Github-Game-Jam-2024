@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bm76in6mxgs34"]
+[gd_scene load_steps=8 format=3 uid="uid://bm76in6mxgs34"]
 
 [ext_resource type="Script" path="res://enemy.gd" id="1_ddthi"]
 [ext_resource type="Texture2D" uid="uid://6fd5il1fqdnj" path="res://Sprites/(1)red_bad_guy_pixel.png" id="4_iq4o3"]
@@ -18,11 +18,25 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="GDScript" id="GDScript_gf3is"]
+script/source = "extends Area2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vl32j"]
-size = Vector2(94, 49)
+size = Vector2(94, 54)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8aop0"]
-size = Vector2(84, 49)
+size = Vector2(72, 50)
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 2
@@ -36,13 +50,13 @@ animation = &"red_walking"
 
 [node name="Enemy_HitBox" type="Area2D" parent="."]
 collision_layer = 2
+script = SubResource("GDScript_gf3is")
 
 [node name="HitBox_Area" type="CollisionShape2D" parent="Enemy_HitBox"]
-position = Vector2(1, -0.5)
+position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_vl32j")
 
 [node name="Stage_Dectection_Area" type="CollisionShape2D" parent="."]
-position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_8aop0")
 
 [node name="Attack_Cooldown_Timer" type="Timer" parent="."]

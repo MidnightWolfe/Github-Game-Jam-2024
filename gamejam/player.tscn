@@ -128,16 +128,14 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_imm38"]
-size = Vector2(15.3333, 17)
+size = Vector2(14.3333, 16.6667)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gqfqa"]
-radius = 26.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_imm38"]
-size = Vector2(19.5, 18.3334)
+radius = 33.0
 
 [node name="Player" type="CharacterBody2D"]
-collision_layer = 3
+collision_layer = 7
+collision_mask = 3
 script = ExtResource("1_0hlg0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -146,22 +144,22 @@ scale = Vector2(1.85938, 1.98437)
 sprite_frames = SubResource("SpriteFrames_ub2ex")
 animation = &"idle"
 
-[node name="Player_HitBox" type="Area2D" parent="."]
-collision_layer = 3
-
-[node name="HitBox" type="CollisionShape2D" parent="Player_HitBox"]
-position = Vector2(-4, -1)
-shape = SubResource("CircleShape2D_gqfqa")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
 scale = Vector2(3, 3)
 texture = ExtResource("2_t0ey0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-3, -3.49996)
+position = Vector2(-3.5, -3)
 scale = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_imm38")
+
+[node name="Player_HitBox" type="Area2D" parent="."]
+collision_layer = 3
+
+[node name="HitBox" type="CollisionShape2D" parent="Player_HitBox"]
+position = Vector2(-4, -3)
+shape = SubResource("CircleShape2D_gqfqa")
 
 [node name="DashTimer" type="Timer" parent="."]
 wait_time = 0.5
