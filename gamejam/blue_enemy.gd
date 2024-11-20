@@ -16,7 +16,7 @@ var IsEnemyAlive = true
 
 func _ready() -> void:
 	$Blue_Enemy_Animation.play("Blue_Enemy") #The animation that causes the enemy to walk back and forth
-	$Blue_Bad_Guy_Animated.play("red_walking")
+	$Blue_Bad_Guy_Animated.play("blue_walking")
 
 func _physics_process(delta: float) -> void:
 	#player_attack()
