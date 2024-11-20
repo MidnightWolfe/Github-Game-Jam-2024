@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://c641ua0gj366x"]
+
+[ext_resource type="Script" path="res://blue_enemy.gd" id="1_2o8cy"]
+[ext_resource type="Texture2D" uid="uid://sxbvyps61lyr" path="res://Sprites/BlueBadGuy_ArmsUp.png" id="1_vaovq"]
+[ext_resource type="Texture2D" uid="uid://c3u2f1truc1di" path="res://Sprites/BlueBadGuy_ArmsDown.png" id="2_d4kui"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qkcx5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_vaovq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_d4kui")
+}],
+"loop": true,
+"name": &"blue_walking",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5e0n1"]
+size = Vector2(94, 54)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1o72e"]
+size = Vector2(72, 50)
+
+[node name="Enemy_Blue" type="CharacterBody2D"]
+script = ExtResource("1_2o8cy")
+
+[node name="Blue_Bad_Guy_Animated" type="AnimatedSprite2D" parent="."]
+position = Vector2(4.76837e-07, 5.04871e-29)
+scale = Vector2(0.754, 0.75)
+sprite_frames = SubResource("SpriteFrames_qkcx5")
+animation = &"blue_walking"
+autoplay = "blue_walking"
+frame_progress = 0.85601
+
+[node name="Enemy_HitBox" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="HitBox_Area" type="CollisionShape2D" parent="Enemy_HitBox"]
+visible = false
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_5e0n1")
+
+[node name="Stage_Dectection_Area" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_1o72e")
+
+[node name="Attack_Cooldown_Timer" type="Timer" parent="."]
+wait_time = 0.25
+
+[connection signal="body_entered" from="Enemy_HitBox" to="." method="_on_enemy_hit_box_body_entered"]
+[connection signal="body_exited" from="Enemy_HitBox" to="." method="_on_enemy_hit_box_body_exited"]

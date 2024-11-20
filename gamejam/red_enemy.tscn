@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://bm76in6mxgs34"]
 
 [ext_resource type="Script" path="res://enemy.gd" id="1_ddthi"]
-[ext_resource type="Texture2D" uid="uid://6fd5il1fqdnj" path="res://Sprites/(1)red_bad_guy_pixel.png" id="4_iq4o3"]
-[ext_resource type="Texture2D" uid="uid://4gsoub23b2so" path="res://Sprites/(2)red_bad_guy_pixel.png" id="5_u4x8k"]
+[ext_resource type="Texture2D" uid="uid://5scrxvhiv28h" path="res://Sprites/RedBadGuy_ArmsUp.png" id="4_iq4o3"]
+[ext_resource type="Texture2D" uid="uid://cq2gwqn5hvm41" path="res://Sprites/RedBadGuy_ArmsDown.png" id="5_u4x8k"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_u5y1d"]
 animations = [{
@@ -38,11 +38,11 @@ size = Vector2(94, 54)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8aop0"]
 size = Vector2(72, 50)
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy_Red" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_ddthi")
 
-[node name="Bad_Guy_Animated" type="AnimatedSprite2D" parent="."]
+[node name="Red_Bad_Guy_Animated" type="AnimatedSprite2D" parent="."]
 position = Vector2(4.76837e-07, 5.04871e-29)
 scale = Vector2(0.754, 0.75)
 sprite_frames = SubResource("SpriteFrames_u5y1d")
@@ -53,10 +53,12 @@ collision_layer = 2
 script = SubResource("GDScript_gf3is")
 
 [node name="HitBox_Area" type="CollisionShape2D" parent="Enemy_HitBox"]
+visible = false
 position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_vl32j")
 
 [node name="Stage_Dectection_Area" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_8aop0")
 
 [node name="Attack_Cooldown_Timer" type="Timer" parent="."]

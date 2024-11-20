@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6fd5il1fqdnj"
-path="res://.godot/imported/(1)red_bad_guy_pixel.png-9f5e64c54c70547c2558929517db352d.ctex"
+uid="uid://5scrxvhiv28h"
+path="res://.godot/imported/RedBadGuy_ArmsUp.png-e5e718ceb9b922da34878f3ea0a84fa1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/(1)red_bad_guy_pixel.png"
-dest_files=["res://.godot/imported/(1)red_bad_guy_pixel.png-9f5e64c54c70547c2558929517db352d.ctex"]
+source_file="res://Sprites/RedBadGuy_ArmsUp.png"
+dest_files=["res://.godot/imported/RedBadGuy_ArmsUp.png-e5e718ceb9b922da34878f3ea0a84fa1.ctex"]
 
 [params]
 

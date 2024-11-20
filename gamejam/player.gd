@@ -173,14 +173,13 @@ func _on_player_hit_box_body_exited(body: Node2D) -> void:
 #This is set up so that when the enemy touches the player, the player is "attacked".
 func enemy_attack():
 	if enemyInAttackRange and enemyAttackCooldown == true:
-		currentHealth = currentHealth - 5 #Enemy damage
+		currentHealth = currentHealth - 5 #Enemy damage to player
 		healthChanged.emit()
 
 		enemyAttackCooldown = false
 		$Attack_Cooldown_Timer.start()
-		print("Player took -1 damage")
+		print("Player took -5 damage")
 		print(currentHealth)
-
 
 func _on_attack_cooldown_timer_timeout() -> void:
 	enemyAttackCooldown = true

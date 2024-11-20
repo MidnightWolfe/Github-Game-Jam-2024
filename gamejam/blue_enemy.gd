@@ -15,8 +15,8 @@ var health = 5  #Enemies currently have five hit points (HP)
 var IsEnemyAlive = true
 
 func _ready() -> void:
-	$Enemy_Animation.play("enemy") #The animation that causes the enemy to walk back and forth
-	$Red_Bad_Guy_Animated.play("red_walking")
+	$Blue_Enemy_Animation.play("Blue_Enemy") #The animation that causes the enemy to walk back and forth
+	$Blue_Bad_Guy_Animated.play("red_walking")
 
 func _physics_process(delta: float) -> void:
 	#player_attack()
