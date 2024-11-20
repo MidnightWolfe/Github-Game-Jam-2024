@@ -1,12 +1,17 @@
-[gd_scene load_steps=15 format=4 uid="uid://bhnlrrkm28bx1"]
+[gd_scene load_steps=27 format=4 uid="uid://bhnlrrkm28bx1"]
 
 [ext_resource type="Texture2D" uid="uid://dnrsmegk57si6" path="res://Sprites/GreyGrass.png" id="1_403di"]
 [ext_resource type="Texture2D" uid="uid://bmgoe3ubfveyy" path="res://Sprites/GreyCloud.png" id="2_fuukr"]
 [ext_resource type="Texture2D" uid="uid://y78pd8kdo1tj" path="res://Sprites/GreyBlocks.png" id="3_eyjap"]
 [ext_resource type="Texture2D" uid="uid://6tjl30r7ycoi" path="res://Sprites/GreyBGPlants.png" id="4_k5o81"]
 [ext_resource type="PackedScene" uid="uid://bmebq4x1bgoi4" path="res://player.tscn" id="5_oddco"]
+[ext_resource type="PackedScene" uid="uid://bm76in6mxgs34" path="res://red_enemy.tscn" id="6_gypb1"]
 [ext_resource type="Script" path="res://sign.gd" id="6_hq0g3"]
 [ext_resource type="Texture2D" uid="uid://047ypkd6s2hj" path="res://Sprites/sign.png" id="7_b5da3"]
+[ext_resource type="Script" path="res://player_health_bar.gd" id="7_ojpul"]
+[ext_resource type="Texture2D" uid="uid://cwm1sk52d26rk" path="res://Sprites/health back.png" id="8_p31ef"]
+[ext_resource type="Texture2D" uid="uid://bmkopq48eahae" path="res://Sprites/health front.png" id="9_5uxbn"]
+[ext_resource type="PackedScene" uid="uid://c641ua0gj366x" path="res://blue_enemy.tscn" id="12_6ihk6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nqiri"]
 resource_name = "Grey Grass"
@@ -165,7 +170,86 @@ scale_min = 2.0
 scale_max = 2.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4v6jm"]
-size = Vector2(53, 43)
+size = Vector2(36, 30.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3bt27"]
+size = Vector2(36, 30)
+
+[sub_resource type="Animation" id="Animation_c3jmx"]
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(118, 22), Vector2(284, 22), Vector2(118, 22)]
+}
+
+[sub_resource type="Animation" id="Animation_l1a4p"]
+resource_name = "enemy"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(133, 24), Vector2(250, 24), Vector2(133, 24)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_imlir"]
+_data = {
+"RESET": SubResource("Animation_c3jmx"),
+"enemy": SubResource("Animation_l1a4p")
+}
+
+[sub_resource type="Animation" id="Animation_doqte"]
+resource_name = "Blue_Enemy"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(414, -22), Vector2(580, -22), Vector2(414, -22)]
+}
+
+[sub_resource type="Animation" id="Animation_1flr5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(414, -22)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qjejj"]
+_data = {
+"Blue_Enemy": SubResource("Animation_doqte"),
+"RESET": SubResource("Animation_1flr5")
+}
 
 [node name="Node2D" type="Node2D"]
 
@@ -191,19 +275,72 @@ process_material = SubResource("ParticleProcessMaterial_jtdni")
 [node name="Sign" type="StaticBody2D" parent="."]
 z_index = -1
 position = Vector2(155, 53)
+collision_layer = 4
+collision_mask = 2
+collision_priority = 2.0
 script = ExtResource("6_hq0g3")
 
-[node name="Sprite2D" type="Sprite2D" parent="Sign"]
+[node name="SignSprite" type="Sprite2D" parent="Sign"]
 position = Vector2(1, -21)
 texture = ExtResource("7_b5da3")
 
-[node name="Area2D" type="Area2D" parent="Sign"]
+[node name="Readable_Area" type="Area2D" parent="Sign"]
+visible = false
 position = Vector2(-5, 12)
+collision_layer = 4
+collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sign/Area2D"]
-position = Vector2(6, -38)
+[node name="ReadableAreaCollisionShape" type="CollisionShape2D" parent="Sign/Readable_Area"]
+position = Vector2(6, -31.75)
 shape = SubResource("RectangleShape2D_4v6jm")
 
-[connection signal="area_entered" from="Sign/Area2D" to="Sign" method="_on_area_2d_area_entered"]
-[connection signal="body_entered" from="Sign/Area2D" to="Sign" method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Sign/Area2D" to="Sign" method="_on_area_2d_body_exited"]
+[node name="SignCollisionShape" type="CollisionShape2D" parent="Sign"]
+visible = false
+position = Vector2(1, -20)
+shape = SubResource("RectangleShape2D_3bt27")
+
+[node name="Red_Enemy" parent="." instance=ExtResource("6_gypb1")]
+position = Vector2(118, 22)
+collision_layer = 3
+
+[node name="Enemy_Animation" type="AnimationPlayer" parent="Red_Enemy"]
+libraries = {
+"": SubResource("AnimationLibrary_imlir")
+}
+
+[node name="HealthBar_CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PlayerHealthBar" type="ProgressBar" parent="HealthBar_CanvasLayer"]
+visible = false
+offset_right = 158.0
+offset_bottom = 27.0
+max_value = 30.0
+value = 30.0
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="HealthBar_CanvasLayer" node_paths=PackedStringArray("player")]
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(3.5, 3.5)
+max_value = 30.0
+value = 30.0
+stretch_margin_left = 4
+stretch_margin_top = 4
+stretch_margin_right = 4
+stretch_margin_bottom = 4
+texture_under = ExtResource("8_p31ef")
+texture_progress = ExtResource("9_5uxbn")
+script = ExtResource("7_ojpul")
+player = NodePath("../../Player")
+
+[node name="Enemy_Blue" parent="." instance=ExtResource("12_6ihk6")]
+position = Vector2(414, -22)
+
+[node name="Blue_Enemy_Animation" type="AnimationPlayer" parent="Enemy_Blue"]
+libraries = {
+"": SubResource("AnimationLibrary_qjejj")
+}
+autoplay = "Blue_Enemy"
+
+[connection signal="area_entered" from="Sign/Readable_Area" to="Sign" method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Sign/Readable_Area" to="Sign" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Sign/Readable_Area" to="Sign" method="_on_area_2d_body_exited"]
