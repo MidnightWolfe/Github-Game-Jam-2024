@@ -4,33 +4,30 @@
 	# https://www.youtube.com/watch?v=24hXJnwRim0
 extends CharacterBody2D
 
-var speed = 50
+var speed = 100
 var gravity = 10
-var player_chase = false
-var player = null
+var direction = -1
 
 var playerInAttackRange = false
 var playerAttackCooldown = true
 var health = 5  #Enemies currently have five hit points (HP)
 var IsEnemyAlive = true
+var type = "null"
 
 func _ready() -> void:
-	$Enemy_Animation.play("enemy") #The animation that causes the enemy to walk back and forth
-	$Red_Bad_Guy_Animated.play("red_walking")
+	$Enemy_Animation.play(type)
 
-func _physics_process(delta: float) -> void:
-	#player_attack()
+func _physics_process(_delta: float) -> void:
+	if velocity.x == 0 or velocity.y != 0:
+		direction = -direction
+	velocity.x = speed * direction
+	velocity.y += gravity
+	move_and_slide()
 	if health <= 0:
 		IsEnemyAlive = false
 		health = 0
 		print("Enemy has been killed")
-		#_deadEnemy()
-	
-
 		self.queue_free() #This makes the enemy disappear - there are currently no (death) animations
-
-func _deadEnemy(): # This will be used to signal the animation when the enmy dies (to be built)
-	pass
 
 ## This is currently used to determine if the enemy is in the player hitbox
 func enemy():
@@ -56,3 +53,9 @@ func player_attack():
 
 func _on_attack_cooldown_timer_timeout() -> void:
 	playerAttackCooldown = true
+
+func _set_type(newType):
+	type = newType
+
+func _set_position(newPosition):
+	position = newPosition

@@ -41,7 +41,7 @@ var IsPlayerAlive = true
 
 var lastDirection = 1
 ##M
-func _physics_process(delta):
+func _physics_process(_delta):
 	get_input()	
 	move_and_slide()
 	
@@ -134,7 +134,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("enter"):
 		if is_casting_spell:
 			var greatestValue = max(combo.x, combo.y, combo.z)

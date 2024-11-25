@@ -38,7 +38,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	match current_state:
 		State.READY:
 			if !text_queue.is_empty():
