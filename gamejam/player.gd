@@ -27,6 +27,7 @@ const SPELLS = preload("res://spells.tscn")
 var is_casting_spell = false
 var combo = Vector3(0, 0, 0)
 var colour = Color(0, 0, 0)
+@onready var spellParticles = $SpellParticles
 @onready var animationPath = $AnimatedSprite2D
 
 ##Player Attack/HitBox
@@ -95,10 +96,11 @@ func get_input():
 func directSprite(direction: float) -> void:
 	if direction < 0 and lastDirection != -1:
 		lastDirection = -1
+		spellParticles.process_material.emission_shape_offset.x *= -1
 	elif direction > 0 and lastDirection != 1:
 		lastDirection = 1
+		spellParticles.process_material.emission_shape_offset.x *= -1
 	
-	pass
 
 ##Make the player stop dashing
 func _on_dash_timer_timeout() -> void:
@@ -127,6 +129,7 @@ func handle_animation_flip(playerDirection):
 		animationPath.flip_h = true #Flip in the left direction
 
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 
@@ -135,11 +138,11 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
+	var greatestValue = max(combo.x, combo.y, combo.z)
+	if greatestValue != 0:
+				colour = Color(combo.x / greatestValue, combo.y / greatestValue, combo.z / greatestValue)
 	if Input.is_action_just_pressed("enter"):
 		if is_casting_spell:
-			var greatestValue = max(combo.x, combo.y, combo.z)
-			if greatestValue != 0:
-				colour = Color(combo.x / greatestValue, combo.y / greatestValue, combo.z / greatestValue)
 			combo = Vector3(0,0,0)
 			var spell = SPELLS.instantiate()
 			spell._set_colour(colour)
@@ -147,6 +150,8 @@ func _process(_delta: float) -> void:
 			get_parent().add_child(spell)
 			spell.position = $".".global_position
 		is_casting_spell = not is_casting_spell
+	
+	spellParticles.modulate = colour
 	
 	if is_casting_spell:
 		if Input.is_action_just_pressed("1"):

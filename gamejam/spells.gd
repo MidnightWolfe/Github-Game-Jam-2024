@@ -1,6 +1,6 @@
 extends Area2D
 
-const SPEED = 200
+const SPEED = 400
 var velocity = Vector2()
 var direction = 0
 var colour = Color()
@@ -41,6 +41,9 @@ func _physics_process(delta: float) -> void:
 	velocity.x = SPEED * delta * direction
 	translate(velocity)
 	animationSprite.play("projectile")
+
+func spell():
+	pass
 
 func _set_colour(newColour):
 	colour = newColour

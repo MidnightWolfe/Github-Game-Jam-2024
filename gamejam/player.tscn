@@ -142,7 +142,7 @@ script = ExtResource("1_0hlg0")
 position = Vector2(-2.75, -2.25)
 scale = Vector2(1.85938, 1.98437)
 sprite_frames = SubResource("SpriteFrames_ub2ex")
-animation = &"idle"
+animation = &"run"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false

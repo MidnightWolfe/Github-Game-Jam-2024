@@ -33,29 +33,37 @@ func _physics_process(_delta: float) -> void:
 func enemy():
 	pass;
 
-func _on_enemy_hit_box_body_entered(body: Node2D) -> void:
-	if body.has_method("player"):
-		playerInAttackRange = true
+func player_attack(damage_type: String):
+	if type == "Red":
+		if damage_type == "Cyan":
+			damage()
+	elif type == "Green":
+		if damage_type == "Magenta":
+			damage()
+	elif type == "Blue":
+		if damage_type == "Yellow":
+			damage()
+	elif type == "Cyan":
+		if damage_type == "Red":
+			damage()
+	elif type == "Magenta":
+		if damage_type == "Green":
+			damage()
+	elif type == "Yellow":
+		if damage_type == "Blue":
+			damage()
 
-func _on_enemy_hit_box_body_exited(body: Node2D) -> void:
-	if body.has_method("player"):
-		playerInAttackRange = false
-
-##Functions that happen while the player is attacking
-#This is currently set up so that when the player touches the enemy, the enemy is "attacked". This should be changed to the spell mechanics
-func player_attack():
-	if playerInAttackRange and playerAttackCooldown:
-		health = health - 1
-		playerAttackCooldown = false
-		$Attack_Cooldown_Timer.start()
-		print("Enemy took -1 damage")
-		print(health)
-
-func _on_attack_cooldown_timer_timeout() -> void:
-	playerAttackCooldown = true
+func damage():
+	health = health - 1
+	print("Enemy took -1 damage")
+	print(health)
 
 func _set_type(newType):
 	type = newType
 
 func _set_position(newPosition):
 	position = newPosition
+
+func _on_enemy_hit_box_area_entered(area: Area2D) -> void:
+	if area.has_method("spell"):
+		player_attack(area.type)
