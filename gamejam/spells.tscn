@@ -198,6 +198,7 @@ animations = [{
 
 [node name="Spells" type="Area2D"]
 light_mask = 3
+collision_mask = 128
 script = ExtResource("1_umqmt")
 metadata/_edit_horizontal_guides_ = [-22.0]
 
