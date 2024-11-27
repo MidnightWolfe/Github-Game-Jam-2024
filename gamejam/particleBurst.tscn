@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://fsclyiy3pvfy"]
+
+[ext_resource type="Script" path="res://particle_burst.gd" id="1_vsue0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ibx12"]
+radius = 17.2627
+
+[sub_resource type="Curve" id="Curve_urca8"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, 352.088), 0.0, 0.0, 0, 0, Vector2(1, -225.495), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_j6cii"]
+curve = SubResource("Curve_urca8")
+
+[sub_resource type="Curve" id="Curve_hm3qu"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.453333, 0.406593), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_j6tvx"]
+curve = SubResource("Curve_hm3qu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wwyim"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 14.66
+angle_min = 1.07288e-05
+angle_max = 1.07288e-05
+angle_curve = SubResource("CurveTexture_j6cii")
+spread = 180.0
+initial_velocity_min = 100.0
+initial_velocity_max = 140.0
+gravity = Vector3(0, 0, 0)
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_j6tvx")
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_vsue0")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 129
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_ibx12")
+
+[node name="SpellEffect" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 80
+process_material = SubResource("ParticleProcessMaterial_wwyim")
+one_shot = true
+explosiveness = 0.86
+trail_enabled = true
+trail_lifetime = 0.1

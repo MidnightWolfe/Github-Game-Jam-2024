@@ -7,6 +7,10 @@ var colour = Color()
 var type = "null"
 @onready var animationSprite = $AnimatedSprite2D
 
+#Adding refrence to the particleBurst for when a spell collides with something.
+var particleEffect = preload("res://particleBurst.tscn")
+
+
 func _ready() -> void:
 	animationSprite.modulate = colour
 	if colour.r == 0 && colour.g == 0 && colour.b == 0:
@@ -41,6 +45,15 @@ func _physics_process(delta: float) -> void:
 	velocity.x = SPEED * delta * direction
 	translate(velocity)
 	animationSprite.play("projectile")
+	
+func _process(_delta: float) -> void:
+	if get_overlapping_bodies().size()>0:
+		var spellBurst = particleEffect.instantiate()
+		get_parent().add_child(spellBurst)	
+		spellBurst.modulate = colour
+		spellBurst.global_position = global_position
+		spellBurst.colour = type
+		queue_free()
 
 func spell():
 	pass

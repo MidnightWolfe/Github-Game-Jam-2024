@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=4 uid="uid://bhnlrrkm28bx1"]
+[gd_scene load_steps=75 format=4 uid="uid://bhnlrrkm28bx1"]
 
 [ext_resource type="Texture2D" uid="uid://dnrsmegk57si6" path="res://Sprites/GreyGrass.png" id="1_1fkdb"]
 [ext_resource type="Script" path="res://level_0.gd" id="1_pr364"]
@@ -38,6 +38,8 @@
 [ext_resource type="Script" path="res://TileMapInteraction.gd" id="30_jus2t"]
 [ext_resource type="Script" path="res://secretManager.gd" id="31_oyf07"]
 [ext_resource type="Script" path="res://secret.gd" id="31_vpvjo"]
+[ext_resource type="Script" path="res://area_to_check.gd" id="33_vo1c5"]
+[ext_resource type="Script" path="res://area_to_remove.gd" id="34_4w6qr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ymt2q"]
 texture = ExtResource("9_1882d")
@@ -1094,8 +1096,10 @@ script = ExtResource("31_oyf07")
 script = ExtResource("31_vpvjo")
 
 [node name="AreaToCheck" type="Node2D" parent="TileMapLayer/Secrets/TestSecret"]
+script = ExtResource("33_vo1c5")
 
 [node name="AreaToRemove" type="Node2D" parent="TileMapLayer/Secrets/TestSecret"]
+script = ExtResource("34_4w6qr")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 enabled = false

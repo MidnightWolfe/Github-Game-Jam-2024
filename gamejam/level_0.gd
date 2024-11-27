@@ -3,7 +3,7 @@ extends Node2D
 const ENEMY = preload("res://enemy.tscn")
 
 func _ready() -> void:
-	_add_enemy("Red", Vector2(-350,50))
+	_add_enemy("Red", Vector2(-400,0))
 	_add_enemy("Green", Vector2(-200,50))
 	_add_enemy("Blue", Vector2(500,-125))
 	_add_enemy("Cyan", Vector2(200,-175))
