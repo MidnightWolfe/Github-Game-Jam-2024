@@ -24,12 +24,22 @@ text = "RESUME"
 
 [node name="Quit" type="Button" parent="."]
 layout_mode = 2
-offset_top = 43.0
+offset_top = 89.0
 offset_right = 155.0
-offset_bottom = 82.0
+offset_bottom = 128.0
 theme = ExtResource("2_itu22")
 theme_override_fonts/font = ExtResource("3_1588m")
 text = "QUIT"
 
+[node name="Main Menu" type="Button" parent="."]
+layout_mode = 0
+offset_top = 44.0
+offset_right = 155.0
+offset_bottom = 83.0
+theme = ExtResource("2_itu22")
+theme_override_fonts/font = ExtResource("3_1588m")
+text = "MAIN MENU"
+
 [connection signal="pressed" from="Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Main Menu" to="." method="_on_main_menu_pressed"]

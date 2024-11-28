@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cem2q26j12wui"]
+[gd_scene load_steps=5 format=3 uid="uid://cem2q26j12wui"]
 
 [ext_resource type="Script" path="res://credits.gd" id="1_d32c5"]
 [ext_resource type="Theme" uid="uid://blfavfe01gtm7" path="res://Themes/BasicButton.tres" id="2_ripad"]
 [ext_resource type="FontFile" uid="uid://duijj1wrubrvq" path="res://Pixel.ttf" id="3_k28co"]
+[ext_resource type="Script" path="res://main_menu_audio.gd" id="4_j7p7w"]
 
 [node name="Credits" type="Control"]
 layout_mode = 3
@@ -49,5 +50,9 @@ text = "																										THANK YOU FOR PLAYING!
 																	
 
 																															PLACEHOLDER"
+
+[node name="MainMenuAudio" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("4_j7p7w")
 
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

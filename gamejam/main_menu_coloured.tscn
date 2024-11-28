@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://c42olx3rvhor1"]
+[gd_scene load_steps=6 format=3 uid="uid://c42olx3rvhor1"]
 
 [ext_resource type="Texture2D" uid="uid://be36ei3pjrv4n" path="res://Themes/Player land Enemy menu.png" id="1_bhsle"]
+[ext_resource type="Script" path="res://main_menu_coloured.gd" id="1_xjohn"]
 [ext_resource type="FontFile" uid="uid://duijj1wrubrvq" path="res://Pixel.ttf" id="2_i8hcl"]
 [ext_resource type="Theme" uid="uid://c7vr52ie26ey6" path="res://Themes/ColoredButton.tres" id="3_h0epg"]
+[ext_resource type="Script" path="res://main_menu_audio.gd" id="5_wwtm1"]
 
 [node name="MainMenuColoured" type="Control"]
 layout_mode = 3
@@ -11,15 +13,23 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_xjohn")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 1156.0
+offset_bottom = 641.0
+color = Color(0.196078, 0.117647, 0.960784, 1)
 
 [node name="Land" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.017
 anchor_bottom = 0.031
-offset_left = 2.0
+offset_left = -1.0
 offset_top = 201.0
-offset_right = 1120.42
+offset_right = 1135.42
 offset_bottom = 622.912
 texture = ExtResource("1_bhsle")
 
@@ -29,7 +39,6 @@ offset_left = 355.0
 offset_top = 19.0
 offset_right = 753.0
 offset_bottom = 63.0
-theme_override_colors/font_selected_color = Color(0, 0.800717, 0.897898, 1)
 theme_override_fonts/normal_font = ExtResource("2_i8hcl")
 theme_override_font_sizes/normal_font_size = 32
 text = "CAT GOT YOUR COLOUR!"
@@ -63,3 +72,11 @@ offset_bottom = 304.0
 theme = ExtResource("3_h0epg")
 theme_override_fonts/font = ExtResource("2_i8hcl")
 text = "QUIT"
+
+[node name="MainMenuAudio" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("5_wwtm1")
+
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
