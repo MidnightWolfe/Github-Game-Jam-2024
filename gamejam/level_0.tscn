@@ -1,5 +1,4 @@
-
-[gd_scene load_steps=77 format=4 uid="uid://bhnlrrkm28bx1"]
+[gd_scene load_steps=79 format=4 uid="uid://bhnlrrkm28bx1"]
 
 [ext_resource type="Texture2D" uid="uid://dnrsmegk57si6" path="res://Sprites/GreyGrass.png" id="1_1fkdb"]
 [ext_resource type="Script" path="res://level_0.gd" id="1_pr364"]
@@ -1156,18 +1155,6 @@ shape = SubResource("RectangleShape2D_lcsce")
 
 [node name="Signs" type="Node" parent="."]
 
-
-[node name="PauseMenu" parent="Player/Camera2D" instance=ExtResource("38_o8qo6")]
-visible = false
-offset_left = -82.0
-offset_top = -41.0
-offset_right = -82.0
-offset_bottom = -41.0
-
-[node name="SpellParticles" type="GPUParticles2D" parent="Player"]
-position = Vector2(-1, -16)
-process_material = SubResource("ParticleProcessMaterial_jtdni")
-
 [node name="SignTemplate" type="StaticBody2D" parent="Signs"]
 z_index = -1
 position = Vector2(157, 168)
@@ -1190,7 +1177,6 @@ visible = false
 position = Vector2(-5, 12)
 collision_layer = 4
 collision_mask = 2
-
 
 [node name="ReadableAreaCollisionShape" type="CollisionShape2D" parent="Signs/SignTemplate/Readable_Area"]
 position = Vector2(6, -31.75)
@@ -1413,6 +1399,10 @@ visible = false
 position = Vector2(1, -20)
 shape = SubResource("RectangleShape2D_3bt27")
 
+[node name="Player#SpellParticles" type="GPUParticles2D" parent="."]
+position = Vector2(-1, -16)
+process_material = SubResource("ParticleProcessMaterial_jtdni")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 enabled = false
 
@@ -1423,6 +1413,12 @@ collision_layer = 71
 [node name="Camera2D" type="Camera2D" parent="Player"]
 limit_smoothed = true
 
+[node name="PauseMenu" parent="Player/Camera2D" instance=ExtResource("38_o8qo6")]
+offset_left = -50.0
+offset_top = -112.0
+offset_right = -50.0
+offset_bottom = -112.0
+
 [node name="SpellParticles" type="GPUParticles2D" parent="Player"]
 position = Vector2(-1, -16)
 emitting = false
@@ -1431,6 +1427,7 @@ process_material = SubResource("ParticleProcessMaterial_jtdni")
 [node name="HealthBar_CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PlayerHealthBar" type="TextureProgressBar" parent="HealthBar_CanvasLayer" node_paths=PackedStringArray("player")]
+visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 max_value = 30.0
@@ -1439,7 +1436,6 @@ texture_under = ExtResource("36_rly6i")
 texture_progress = ExtResource("37_7618d")
 script = ExtResource("11_eq2cp")
 player = NodePath("../../Player")
-
 
 [node name="movement_sounds" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
@@ -1452,9 +1448,6 @@ script = ExtResource("39_ncqgp")
 [node name="spell_sounds" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("40_mu761")
-
-[connection signal="finished" from="background_music" to="background_music" method="_on_finished"]
-[connection signal="finished" from="spell_sounds" to="." method="_on_spell_sounds_finished"]
 
 [connection signal="area_entered" from="Signs/SignTemplate/Readable_Area" to="Signs/SignTemplate" method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Signs/SignTemplate/Readable_Area" to="Signs/SignTemplate" method="_on_area_2d_body_entered"]
@@ -1480,4 +1473,5 @@ script = ExtResource("40_mu761")
 [connection signal="area_entered" from="Signs/BasicRedSecretSign/Readable_Area" to="Signs/BasicRedSecretSign" method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Signs/BasicRedSecretSign/Readable_Area" to="Signs/BasicRedSecretSign" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Signs/BasicRedSecretSign/Readable_Area" to="Signs/BasicRedSecretSign" method="_on_area_2d_body_exited"]
-
+[connection signal="finished" from="background_music" to="background_music" method="_on_finished"]
+[connection signal="finished" from="spell_sounds" to="." method="_on_spell_sounds_finished"]
