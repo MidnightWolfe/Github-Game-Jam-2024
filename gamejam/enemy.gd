@@ -3,6 +3,8 @@
 	# https://www.youtube.com/watch?v=SGd9TlqkaFU
 	# https://www.youtube.com/watch?v=24hXJnwRim0
 extends CharacterBody2D
+@onready var enemy_sounds = %enemy_sounds
+var sound : AudioStream = preload("res://Audio/enemy_sound.wav")
 
 var speed = 100
 var gravity = 10
@@ -16,6 +18,7 @@ var type = "null"
 
 func _ready() -> void:
 	$Enemy_Animation.play(type)
+	enemy_sounds.set_stream(sound)
 
 func _physics_process(_delta: float) -> void:
 	if velocity.x == 0 or velocity.y != 0:
@@ -54,6 +57,7 @@ func player_attack(damage_type: String):
 			damage()
 
 func damage():
+	enemy_sounds.play()
 	health = health - 1
 	print("Enemy took -1 damage")
 	print(health)

@@ -13,12 +13,3 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-
-func pause_sound() -> void:
-	self.stop()
-	pass
-func start_sound() -> void:
-	play()
-func _on_finished() -> void:
-	play()
-	pass # Replace with function body.
