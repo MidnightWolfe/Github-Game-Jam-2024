@@ -41,6 +41,7 @@ offset_top = 201.0
 offset_right = 621.0
 offset_bottom = 233.0
 theme = ExtResource("3_h0epg")
+theme_override_fonts/font = ExtResource("2_i8hcl")
 text = "PLAY"
 
 [node name="Credits" type="Button" parent="."]
@@ -50,6 +51,7 @@ offset_top = 236.0
 offset_right = 621.0
 offset_bottom = 268.0
 theme = ExtResource("3_h0epg")
+theme_override_fonts/font = ExtResource("2_i8hcl")
 text = "CREDITS"
 
 [node name="Quit" type="Button" parent="."]
@@ -59,4 +61,5 @@ offset_top = 272.0
 offset_right = 622.0
 offset_bottom = 304.0
 theme = ExtResource("3_h0epg")
+theme_override_fonts/font = ExtResource("2_i8hcl")
 text = "QUIT"

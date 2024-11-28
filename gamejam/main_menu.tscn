@@ -32,6 +32,7 @@ offset_top = 256.0
 offset_right = 629.0
 offset_bottom = 294.0
 theme = ExtResource("2_dvf40")
+theme_override_fonts/font = ExtResource("4_2er76")
 text = "PLAY"
 
 [node name="Credits" type="Button" parent="."]
@@ -41,6 +42,7 @@ offset_top = 297.0
 offset_right = 629.0
 offset_bottom = 335.0
 theme = ExtResource("2_dvf40")
+theme_override_fonts/font = ExtResource("4_2er76")
 text = "CREDITS"
 
 [node name="Quit" type="Button" parent="."]
@@ -50,6 +52,7 @@ offset_top = 339.0
 offset_right = 629.0
 offset_bottom = 377.0
 theme = ExtResource("2_dvf40")
+theme_override_fonts/font = ExtResource("4_2er76")
 text = "QUIT"
 
 [node name="Title" type="RichTextLabel" parent="."]
