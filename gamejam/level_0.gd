@@ -7,7 +7,7 @@ func _ready() -> void:
 	_add_enemy("Green", Vector2(-200,50))
 	_add_enemy("Blue", Vector2(500,-125))
 	_add_enemy("Cyan", Vector2(200,-175))
-	_add_enemy("Magenta", Vector2(400,-50))
+	_add_enemy("Magenta", Vector2(800,100))
 	_add_enemy("Yellow", Vector2(600,-300))
 
 func _add_enemy(type: String, pos: Vector2):

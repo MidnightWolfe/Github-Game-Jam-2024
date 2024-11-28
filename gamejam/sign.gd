@@ -2,7 +2,7 @@ extends StaticBody2D
 
 const TEXTBOX = preload("res://textbox.tscn")
 var tbinstance
-var firstbug = true
+var firstbug = false #Set to false for a better feeling sign - Ryan
 @export var textbox_line_1: String = ""
 @export var textbox_line_2: String = ""
 @export var textbox_line_3: String = ""
