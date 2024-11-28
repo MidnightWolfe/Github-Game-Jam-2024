@@ -30,6 +30,7 @@ var canDash = true
 ##Sound Code
 @onready var movement_sounds = %movement_sounds
 @onready var spell_sounds = %spell_sounds
+@onready var background_sounds = %background_music
 
 
 ##Markus Code
@@ -158,23 +159,25 @@ func _process(_delta: float) -> void:
 		if is_casting_spell:
 			combo = Vector3(0,0,0)
 			var spell = SPELLS.instantiate()
-			if(colour == Color.BLUE):
-				spell_sounds.spell_blue_sound()
-			elif(colour == Color.RED):
-				spell_sounds.spell_red_sound()
-			elif(colour == Color.GREEN):
-				spell_sounds.spell_green_sound()
-			elif(colour == Color.CYAN):
-				spell_sounds.spell_green_sound()
-			elif(colour == Color.MAGENTA):
-				spell_sounds.spell_green_sound()
-			elif(colour == Color.YELLOW):
-				spell_sounds.spell_green_sound()
-			
 			spell._set_colour(colour)
 			spell._set_direction(lastDirection)
 			get_parent().add_child(spell)
 			spell.position = $".".global_position
+			var spell_type = spell.type
+			print(spell_type)
+			if(spell_type == "Blue"):
+				spell_sounds.spell_blue_sound()
+			elif(spell_type == "Red"):
+				spell_sounds.spell_red_sound()
+			elif(spell_type == "Green"):
+				spell_sounds.spell_green_sound()
+			elif(spell_type == "Cyan"):
+				spell_sounds.spell_cyan_sound()
+			elif(spell_type == "Magenta"):
+				spell_sounds.spell_magenta_sound()
+			elif(spell_type == "Yellow"):
+				spell_sounds.spell_yellow_sound()
+			
 		is_casting_spell = not is_casting_spell
 	
 	spellParticles.modulate = colour
@@ -219,9 +222,11 @@ func _on_attack_cooldown_timer_timeout() -> void:
 ##Function to get the pause menu to show when player hits escape
 func pauseMenu():
 	if paused:
+		background_sounds.play()
 		pause_menu.hide()
 		Engine.time_scale = 1
 	else:
+		background_sounds.stop()
 		pause_menu.show()
 		Engine.time_scale = 0
 		

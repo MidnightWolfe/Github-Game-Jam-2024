@@ -16,7 +16,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if hasCollided:
 		return
-	print("A particle Burst has entered the Area of an object")
+	#print("A particle Burst has entered the Area of an object")
 	var overlapping_bodies = area.get_overlapping_bodies()
 	for body in overlapping_bodies:
 		if body is TileMapLayer:
