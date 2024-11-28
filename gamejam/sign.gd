@@ -3,6 +3,12 @@ extends StaticBody2D
 const TEXTBOX = preload("res://textbox.tscn")
 var tbinstance
 var firstbug = true
+@export var textbox_line_1: String = ""
+@export var textbox_line_2: String = ""
+@export var textbox_line_3: String = ""
+@export var textbox_line_4: String = ""
+@export var textbox_line_5: String = ""
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -26,11 +32,16 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	#print("in _on_area_2d_body_entered")
 	if tbinstance == null and body.has_method("player"):
 		tbinstance = TEXTBOX.instantiate()
-		tbinstance.text_to_be0 = "new text from player0"
-		tbinstance.text_to_be1 = "new text from player1"
-		tbinstance.text_to_be2 = "new text from player2"
-		#tbinstance.text_to_be3 = "new text from player3"
-		#tbinstance.text_to_be4 = "new text from player4"
+		if textbox_line_1 != "":
+			tbinstance.text_to_be0 = textbox_line_1
+		if textbox_line_2 != "":
+			tbinstance.text_to_be1 = textbox_line_2
+		if textbox_line_3 != "":
+			tbinstance.text_to_be2 = textbox_line_3
+		if textbox_line_4 != "":
+			tbinstance.text_to_be3 = textbox_line_4
+		if textbox_line_5 != "":
+			tbinstance.text_to_be4 = textbox_line_5
 		add_child(tbinstance)
 	else:
 		#print("did not create another instance")
