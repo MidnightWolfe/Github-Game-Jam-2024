@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=4 uid="uid://bhnlrrkm28bx1"]
+[gd_scene load_steps=76 format=4 uid="uid://bhnlrrkm28bx1"]
 
 [ext_resource type="Texture2D" uid="uid://dnrsmegk57si6" path="res://Sprites/GreyGrass.png" id="1_1fkdb"]
 [ext_resource type="Script" path="res://level_0.gd" id="1_pr364"]
@@ -37,6 +37,9 @@
 [ext_resource type="Texture2D" uid="uid://cadjtqp2jvn8j" path="res://Sprites/CyanGrass.png" id="29_r88a2"]
 [ext_resource type="Script" path="res://TileMapInteraction.gd" id="30_jus2t"]
 [ext_resource type="Script" path="res://SecretMechanic.gd" id="31_66fvq"]
+[ext_resource type="Script" path="res://movement_sounds.gd" id="38_t2ds0"]
+[ext_resource type="Script" path="res://background_music.gd" id="39_ncqgp"]
+[ext_resource type="Script" path="res://spell_sounds.gd" id="40_mu761"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ymt2q"]
 texture = ExtResource("9_1882d")
@@ -1163,6 +1166,19 @@ texture_progress = ExtResource("10_ksodi")
 script = ExtResource("11_eq2cp")
 player = NodePath("../../Player")
 
+[node name="movement_sounds" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("38_t2ds0")
+
+[node name="background_music" type="AudioStreamPlayer2D" parent="."]
+script = ExtResource("39_ncqgp")
+
+[node name="spell_sounds" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("40_mu761")
+
 [connection signal="area_entered" from="Sign/Readable_Area" to="Sign" method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Sign/Readable_Area" to="Sign" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Sign/Readable_Area" to="Sign" method="_on_area_2d_body_exited"]
+[connection signal="finished" from="background_music" to="background_music" method="_on_finished"]
+[connection signal="finished" from="spell_sounds" to="." method="_on_spell_sounds_finished"]

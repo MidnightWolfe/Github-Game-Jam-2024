@@ -19,7 +19,9 @@ var maxJumpCount = 2
 const dashSpeed = 500
 var dashing = false
 var canDash = true
-##Liam's Code
+##Sound Code
+@onready var movement_sounds = %movement_sounds
+@onready var spell_sounds = %spell_sounds
 
 
 ##Markus Code
@@ -69,6 +71,7 @@ func get_input():
 	
 	##Setting dash to true if shift is pressed and setting a timer
 	if Input.is_action_just_pressed("dash") and canDash:
+		movement_sounds.dash_sound()
 		dashing = true
 		canDash = false
 		$DashTimer.start()
@@ -82,6 +85,7 @@ func get_input():
 		jumpCount = 0
 		
 	if Input.is_action_just_pressed("space") && jumpCount < maxJumpCount: #To get the player to jump with space bar and double jump
+		movement_sounds.jump_sound()
 		velocity.y = jumpPower
 		jumpCount += 1
 	
@@ -145,6 +149,19 @@ func _process(_delta: float) -> void:
 		if is_casting_spell:
 			combo = Vector3(0,0,0)
 			var spell = SPELLS.instantiate()
+			if(colour == Color.BLUE):
+				spell_sounds.spell_blue_sound()
+			elif(colour == Color.RED):
+				spell_sounds.spell_red_sound()
+			elif(colour == Color.GREEN):
+				spell_sounds.spell_green_sound()
+			elif(colour == Color.CYAN):
+				spell_sounds.spell_green_sound()
+			elif(colour == Color.MAGENTA):
+				spell_sounds.spell_green_sound()
+			elif(colour == Color.YELLOW):
+				spell_sounds.spell_green_sound()
+			
 			spell._set_colour(colour)
 			spell._set_direction(lastDirection)
 			get_parent().add_child(spell)
