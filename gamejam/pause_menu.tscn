@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://che76syghnp7j"]
+
+[ext_resource type="Script" path="res://pause_menu.gd" id="1_7wsw0"]
+[ext_resource type="Theme" uid="uid://blfavfe01gtm7" path="res://Themes/BasicButton.tres" id="2_itu22"]
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7wsw0")
+
+[node name="Resume" type="Button" parent="."]
+layout_mode = 2
+offset_top = 1.0
+offset_right = 155.0
+offset_bottom = 39.0
+theme = ExtResource("2_itu22")
+text = "RESUME"
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 2
+offset_top = 43.0
+offset_right = 155.0
+offset_bottom = 82.0
+theme = ExtResource("2_itu22")
+text = "QUIT"
+
+[connection signal="pressed" from="Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

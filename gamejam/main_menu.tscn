@@ -1,0 +1,75 @@
+[gd_scene load_steps=5 format=3 uid="uid://bixuvnjitsxng"]
+
+[ext_resource type="Script" path="res://main_menu.gd" id="1_ldy1k"]
+[ext_resource type="Theme" uid="uid://blfavfe01gtm7" path="res://Themes/BasicButton.tres" id="2_dvf40"]
+[ext_resource type="Texture2D" uid="uid://be36ei3pjrv4n" path="res://Themes/Player land Enemy menu.png" id="2_i23o8"]
+[ext_resource type="FontFile" uid="uid://duijj1wrubrvq" path="res://Pixel.ttf" id="4_2er76"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ldy1k")
+
+[node name="Land" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.017
+anchor_bottom = 0.031
+offset_left = 2.0
+offset_top = 201.0
+offset_right = 1120.42
+offset_bottom = 622.912
+texture = ExtResource("2_i23o8")
+
+[node name="Play" type="Button" parent="."]
+layout_mode = 2
+offset_left = 474.0
+offset_top = 256.0
+offset_right = 629.0
+offset_bottom = 294.0
+theme = ExtResource("2_dvf40")
+text = "PLAY"
+
+[node name="Credits" type="Button" parent="."]
+layout_mode = 2
+offset_left = 474.0
+offset_top = 297.0
+offset_right = 629.0
+offset_bottom = 335.0
+theme = ExtResource("2_dvf40")
+text = "CREDITS"
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 2
+offset_left = 474.0
+offset_top = 339.0
+offset_right = 629.0
+offset_bottom = 377.0
+theme = ExtResource("2_dvf40")
+text = "QUIT"
+
+[node name="Title" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 355.0
+offset_top = 19.0
+offset_right = 753.0
+offset_bottom = 63.0
+theme_override_fonts/normal_font = ExtResource("4_2er76")
+theme_override_font_sizes/normal_font_size = 32
+text = "CAT GOT YOUR COLOUR!"
+
+[node name="Secret" type="Button" parent="."]
+layout_mode = 0
+offset_left = 159.0
+offset_top = 348.0
+offset_right = 167.0
+offset_bottom = 356.0
+
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Secret" to="." method="_on_secret_pressed"]

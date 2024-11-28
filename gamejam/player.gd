@@ -3,9 +3,17 @@ extends CharacterBody2D
 
 class_name Player
 
+
+@onready var pause_menu = $Camera2D/PauseMenu
+var paused = false
+
+
+
 signal healthChanged
 
 @export var speed = 200
+
+
 
 ##Basic jump / gravity variables
 var gravity = 10
@@ -41,7 +49,7 @@ var enemyAttackCooldown = true
 var IsPlayerAlive = true
 
 var lastDirection = 1
-##M
+
 func _physics_process(_delta):
 	get_input()	
 	move_and_slide()
@@ -49,10 +57,9 @@ func _physics_process(_delta):
 	enemy_attack()
 	if currentHealth <= 0: #Current Health
 		IsPlayerAlive = false
-		currentHealth = 0 #Current health
+		#currentHealth = 0 #Current health
 		print("Player has been killed")
-		#self.queue_free()#This makes the player disappear - this needs to be changed so that the player respawns after death
-		get_tree().reload_current_scene() #This restarts the scene upon player death
+		get_tree().change_scene_to_file("res://death_menu.tscn")
 	
 ##Function to get player inputs
 func get_input():
@@ -132,12 +139,14 @@ func handle_animation_flip(playerDirection):
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-
+	pause_menu.hide()
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("pause"):
+		pauseMenu()
 	var greatestValue = max(combo.x, combo.y, combo.z)
 	if greatestValue != 0:
 				colour = Color(combo.x / greatestValue, combo.y / greatestValue, combo.z / greatestValue)
@@ -188,3 +197,17 @@ func enemy_attack():
 
 func _on_attack_cooldown_timer_timeout() -> void:
 	enemyAttackCooldown = true
+
+		
+##Function to get the pause menu to show when player hits escape
+func pauseMenu():
+	if paused:
+		pause_menu.hide()
+		Engine.time_scale = 1
+	else:
+		pause_menu.show()
+		Engine.time_scale = 0
+		
+	paused = !paused
+	pass
+	
