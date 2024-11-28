@@ -23,6 +23,7 @@ func _ready() -> void:
 	self.connect("body_exited", Callable(self, "_on_body_exited"))
 	rectangleSizeInXY = collisionShape.get_shape().size
 	pass
+	
 
 #toggles for is_colliding based on collision
 func _on_body_entered(body) -> void:
@@ -37,13 +38,15 @@ func _on_body_exited(body) -> void:
 
 #This is for checking if enough tiles are the correct colour id
 func check_for_erase_tiles() -> void:
-	print("Checking for tiles")
+	print("Checking for tiles of type ", target_tile_colour_id)
 	var tilemap_scale = tilemap.scale.x
 	var rectangle_local_position = global_position / tilemap_scale
 	
 	##Gotta figure out how to get top left and bottom
 	var topLeftRectangle = rectangle_local_position
 	var bottomRightRectangle = rectangle_local_position + rectangleSizeInXY/3
+	print("TopLeftPos: ", topLeftRectangle)
+	print("BottomRightPos ", bottomRightRectangle)
 	
 	#Now convert to tilemap coords, this is used to define the edges of tile deletion
 	var topLeftTile = tilemap.local_to_map(topLeftRectangle)
@@ -59,7 +62,6 @@ func check_for_erase_tiles() -> void:
 			allTilesInArea.append(Vector2i(xValues,yValues))
 			var tile_source_id = tilemap.get_cell_source_id(Vector2i(xValues,yValues))
 			if tile_source_id == -1:
-				print("Empty space in tile checking")
 				continue
 			#now extract the colour (since tile source ids are in 10 id blocks to allow colour changes modulo out 10 and take the remainder for the colour)
 			var tile_colour_id = tile_source_id % 10

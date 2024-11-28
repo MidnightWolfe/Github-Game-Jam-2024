@@ -18,9 +18,8 @@ script = ExtResource("1_d32c5")
 [node name="Back" type="Button" parent="."]
 layout_mode = 2
 offset_left = 3.0
-offset_top = 601.0
 offset_right = 158.0
-offset_bottom = 639.0
+offset_bottom = 38.0
 theme = ExtResource("2_ripad")
 theme_override_fonts/font = ExtResource("3_k28co")
 text = "MAIN MENU

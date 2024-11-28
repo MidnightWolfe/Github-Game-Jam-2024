@@ -1,6 +1,6 @@
 extends TileMapLayer
 
-var debugReadout = false
+var debugReadout = true
 
 # Dictionary to map colors to tile offsets
 var colour_to_offset = {
