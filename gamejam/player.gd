@@ -143,12 +143,15 @@ func _process(_delta: float) -> void:
 				colour = Color(combo.x / greatestValue, combo.y / greatestValue, combo.z / greatestValue)
 	if Input.is_action_just_pressed("enter"):
 		if is_casting_spell:
+			spellParticles.emitting = false
 			combo = Vector3(0,0,0)
 			var spell = SPELLS.instantiate()
 			spell._set_colour(colour)
 			spell._set_direction(lastDirection)
 			get_parent().add_child(spell)
 			spell.position = $".".global_position
+		else:
+			spellParticles.emitting = true
 		is_casting_spell = not is_casting_spell
 	
 	spellParticles.modulate = colour

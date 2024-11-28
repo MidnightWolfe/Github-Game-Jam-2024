@@ -77,4 +77,5 @@ func erase_tile_block(tilePosition: Array) -> void:
 	for tile in tilePosition:
 		tilemap.erase_cell(tile)
 		await get_tree().create_timer(0.0005).timeout
+	queue_free()
 	
