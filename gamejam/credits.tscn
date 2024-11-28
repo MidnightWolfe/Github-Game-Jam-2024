@@ -16,21 +16,27 @@ grow_vertical = 2
 script = ExtResource("1_d32c5")
 
 [node name="Back" type="Button" parent="."]
-layout_mode = 2
-offset_left = 3.0
-offset_right = 158.0
-offset_bottom = 38.0
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -38.0
+offset_right = 155.0
+grow_vertical = 0
 theme = ExtResource("2_ripad")
 theme_override_fonts/font = ExtResource("3_k28co")
 text = "MAIN MENU
 "
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-layout_mode = 0
-offset_left = 4.0
-offset_top = 27.0
-offset_right = 1152.0
-offset_bottom = 598.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -192.0
+offset_right = 192.0
+offset_bottom = 689.0
+grow_horizontal = 2
 theme_override_fonts/normal_font = ExtResource("3_k28co")
 text = "																										THANK YOU FOR PLAYING!
 
