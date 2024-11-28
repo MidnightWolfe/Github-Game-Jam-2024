@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=3 uid="uid://36eiikng2gbo"]
+
+[ext_resource type="Theme" uid="uid://blfavfe01gtm7" path="res://Themes/BasicButton.tres" id="1_24iem"]
+[ext_resource type="Script" path="res://death_menu.gd" id="1_syhiw"]
+[ext_resource type="FontFile" uid="uid://duijj1wrubrvq" path="res://Pixel.ttf" id="3_ib81h"]
+
+[node name="DeathMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_syhiw")
+
+[node name="Retry" type="Button" parent="."]
+layout_mode = 0
+offset_left = 508.0
+offset_top = 259.0
+offset_right = 663.0
+offset_bottom = 297.0
+theme = ExtResource("1_24iem")
+theme_override_fonts/font = ExtResource("3_ib81h")
+text = "RETRY"
+
+[node name="Main Menu" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.007
+anchor_bottom = 0.006
+offset_left = 508.0
+offset_top = 300.0
+offset_right = 654.936
+offset_bottom = 334.112
+theme = ExtResource("1_24iem")
+theme_override_fonts/font = ExtResource("3_ib81h")
+text = "MAIN MENU"
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 0
+offset_left = 508.0
+offset_top = 341.0
+offset_right = 663.0
+offset_bottom = 379.0
+theme = ExtResource("1_24iem")
+theme_override_fonts/font = ExtResource("3_ib81h")
+text = "QUIT"
+
+[node name="YouDied" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 501.0
+offset_top = 154.0
+offset_right = 670.0
+offset_bottom = 191.0
+theme_override_fonts/normal_font = ExtResource("3_ib81h")
+theme_override_font_sizes/normal_font_size = 32
+text = "YOU DIED!"
+
+[connection signal="pressed" from="Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="Main Menu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://che76syghnp7j"]
+
+[ext_resource type="Script" path="res://pause_menu.gd" id="1_7wsw0"]
+[ext_resource type="Theme" uid="uid://blfavfe01gtm7" path="res://Themes/BasicButton.tres" id="2_itu22"]
+[ext_resource type="FontFile" uid="uid://duijj1wrubrvq" path="res://Pixel.ttf" id="3_1588m"]
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7wsw0")
+
+[node name="Resume" type="Button" parent="."]
+layout_mode = 2
+offset_top = 1.0
+offset_right = 155.0
+offset_bottom = 39.0
+theme = ExtResource("2_itu22")
+theme_override_fonts/font = ExtResource("3_1588m")
+text = "RESUME"
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 2
+offset_top = 89.0
+offset_right = 155.0
+offset_bottom = 128.0
+theme = ExtResource("2_itu22")
+theme_override_fonts/font = ExtResource("3_1588m")
+text = "QUIT"
+
+[node name="Main Menu" type="Button" parent="."]
+layout_mode = 0
+offset_top = 44.0
+offset_right = 155.0
+offset_bottom = 83.0
+theme = ExtResource("2_itu22")
+theme_override_fonts/font = ExtResource("3_1588m")
+text = "MAIN MENU"
+
+[connection signal="pressed" from="Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Main Menu" to="." method="_on_main_menu_pressed"]

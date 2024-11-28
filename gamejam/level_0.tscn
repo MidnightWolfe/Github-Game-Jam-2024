@@ -1,4 +1,5 @@
-[gd_scene load_steps=75 format=4 uid="uid://bhnlrrkm28bx1"]
+
+[gd_scene load_steps=77 format=4 uid="uid://bhnlrrkm28bx1"]
 
 [ext_resource type="Texture2D" uid="uid://dnrsmegk57si6" path="res://Sprites/GreyGrass.png" id="1_1fkdb"]
 [ext_resource type="Script" path="res://level_0.gd" id="1_pr364"]
@@ -14,9 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://047ypkd6s2hj" path="res://Sprites/sign.png" id="7_vjqse"]
 [ext_resource type="Texture2D" uid="uid://b3hgnkpbytt13" path="res://Sprites/YellowCloud.png" id="8_jra22"]
 [ext_resource type="Texture2D" uid="uid://vb3pl5r7aekv" path="res://Sprites/MagentaCloud.png" id="9_1882d"]
-[ext_resource type="Texture2D" uid="uid://cwm1sk52d26rk" path="res://Sprites/health back.png" id="9_ccysb"]
 [ext_resource type="Texture2D" uid="uid://dpffxyhntxdap" path="res://Sprites/CyanCloud.png" id="10_0cgws"]
-[ext_resource type="Texture2D" uid="uid://bmkopq48eahae" path="res://Sprites/health front.png" id="10_ksodi"]
 [ext_resource type="Script" path="res://player_health_bar.gd" id="11_eq2cp"]
 [ext_resource type="Texture2D" uid="uid://cno4gcpvbhxfa" path="res://Sprites/GreenGrass.png" id="11_okqpq"]
 [ext_resource type="Texture2D" uid="uid://bajx5yswbn82p" path="res://Sprites/RedBlocks.png" id="13_myiux"]
@@ -37,6 +36,12 @@
 [ext_resource type="Texture2D" uid="uid://cadjtqp2jvn8j" path="res://Sprites/CyanGrass.png" id="29_r88a2"]
 [ext_resource type="Script" path="res://TileMapInteraction.gd" id="30_jus2t"]
 [ext_resource type="Script" path="res://SecretMechanic.gd" id="31_66fvq"]
+[ext_resource type="Texture2D" uid="uid://botallpkpqksx" path="res://Sprites/healthback.png" id="36_rly6i"]
+[ext_resource type="Texture2D" uid="uid://dhqhkd1ixm20v" path="res://Sprites/healthfront.png" id="37_7618d"]
+[ext_resource type="PackedScene" uid="uid://che76syghnp7j" path="res://pause_menu.tscn" id="38_o8qo6"]
+[ext_resource type="Script" path="res://movement_sounds.gd" id="38_t2ds0"]
+[ext_resource type="Script" path="res://background_music.gd" id="39_ncqgp"]
+[ext_resource type="Script" path="res://spell_sounds.gd" id="40_mu761"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ymt2q"]
 texture = ExtResource("9_1882d")
@@ -1151,6 +1156,18 @@ shape = SubResource("RectangleShape2D_lcsce")
 
 [node name="Signs" type="Node" parent="."]
 
+
+[node name="PauseMenu" parent="Player/Camera2D" instance=ExtResource("38_o8qo6")]
+visible = false
+offset_left = -82.0
+offset_top = -41.0
+offset_right = -82.0
+offset_bottom = -41.0
+
+[node name="SpellParticles" type="GPUParticles2D" parent="Player"]
+position = Vector2(-1, -16)
+process_material = SubResource("ParticleProcessMaterial_jtdni")
+
 [node name="SignTemplate" type="StaticBody2D" parent="Signs"]
 z_index = -1
 position = Vector2(157, 168)
@@ -1173,6 +1190,7 @@ visible = false
 position = Vector2(-5, 12)
 collision_layer = 4
 collision_mask = 2
+
 
 [node name="ReadableAreaCollisionShape" type="CollisionShape2D" parent="Signs/SignTemplate/Readable_Area"]
 position = Vector2(6, -31.75)
@@ -1412,27 +1430,31 @@ process_material = SubResource("ParticleProcessMaterial_jtdni")
 
 [node name="HealthBar_CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="PlayerHealthBar" type="ProgressBar" parent="HealthBar_CanvasLayer"]
-visible = false
-offset_right = 158.0
-offset_bottom = 27.0
+[node name="PlayerHealthBar" type="TextureProgressBar" parent="HealthBar_CanvasLayer" node_paths=PackedStringArray("player")]
+offset_right = 40.0
+offset_bottom = 40.0
 max_value = 30.0
 value = 30.0
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="HealthBar_CanvasLayer" node_paths=PackedStringArray("player")]
-offset_right = 32.0
-offset_bottom = 32.0
-scale = Vector2(3.5, 3.5)
-max_value = 30.0
-value = 30.0
-stretch_margin_left = 4
-stretch_margin_top = 4
-stretch_margin_right = 4
-stretch_margin_bottom = 4
-texture_under = ExtResource("9_ccysb")
-texture_progress = ExtResource("10_ksodi")
+texture_under = ExtResource("36_rly6i")
+texture_progress = ExtResource("37_7618d")
 script = ExtResource("11_eq2cp")
 player = NodePath("../../Player")
+
+
+[node name="movement_sounds" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("38_t2ds0")
+
+[node name="background_music" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("39_ncqgp")
+
+[node name="spell_sounds" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("40_mu761")
+
+[connection signal="finished" from="background_music" to="background_music" method="_on_finished"]
+[connection signal="finished" from="spell_sounds" to="." method="_on_spell_sounds_finished"]
 
 [connection signal="area_entered" from="Signs/SignTemplate/Readable_Area" to="Signs/SignTemplate" method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Signs/SignTemplate/Readable_Area" to="Signs/SignTemplate" method="_on_area_2d_body_entered"]
@@ -1458,3 +1480,4 @@ player = NodePath("../../Player")
 [connection signal="area_entered" from="Signs/BasicRedSecretSign/Readable_Area" to="Signs/BasicRedSecretSign" method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Signs/BasicRedSecretSign/Readable_Area" to="Signs/BasicRedSecretSign" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Signs/BasicRedSecretSign/Readable_Area" to="Signs/BasicRedSecretSign" method="_on_area_2d_body_exited"]
+

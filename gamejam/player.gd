@@ -3,9 +3,17 @@ extends CharacterBody2D
 
 class_name Player
 
+
+@onready var pause_menu = $Camera2D/PauseMenu
+var paused = false
+
+
+
 signal healthChanged
 
 @export var speed = 200
+
+
 
 ##Basic jump / gravity variables
 var gravity = 10
@@ -19,7 +27,10 @@ var maxJumpCount = 2
 const dashSpeed = 500
 var dashing = false
 var canDash = true
-##Liam's Code
+##Sound Code
+@onready var movement_sounds = %movement_sounds
+@onready var spell_sounds = %spell_sounds
+@onready var background_sounds = %background_music
 
 
 ##Markus Code
@@ -41,7 +52,7 @@ var enemyAttackCooldown = true
 var IsPlayerAlive = true
 
 var lastDirection = 1
-##M
+
 func _physics_process(_delta):
 	get_input()	
 	move_and_slide()
@@ -49,10 +60,9 @@ func _physics_process(_delta):
 	enemy_attack()
 	if currentHealth <= 0: #Current Health
 		IsPlayerAlive = false
-		currentHealth = 0 #Current health
+		#currentHealth = 0 #Current health
 		print("Player has been killed")
-		#self.queue_free()#This makes the player disappear - this needs to be changed so that the player respawns after death
-		get_tree().reload_current_scene() #This restarts the scene upon player death
+		get_tree().change_scene_to_file("res://death_menu.tscn")
 	
 ##Function to get player inputs
 func get_input():
@@ -69,6 +79,7 @@ func get_input():
 	
 	##Setting dash to true if shift is pressed and setting a timer
 	if Input.is_action_just_pressed("dash") and canDash:
+		movement_sounds.dash_sound()
 		dashing = true
 		canDash = false
 		$DashTimer.start()
@@ -82,6 +93,7 @@ func get_input():
 		jumpCount = 0
 		
 	if Input.is_action_just_pressed("space") && jumpCount < maxJumpCount: #To get the player to jump with space bar and double jump
+		movement_sounds.jump_sound()
 		velocity.y = jumpPower
 		jumpCount += 1
 	
@@ -132,12 +144,14 @@ func handle_animation_flip(playerDirection):
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-
+	pause_menu.hide()
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("pause"):
+		pauseMenu()
 	var greatestValue = max(combo.x, combo.y, combo.z)
 	if greatestValue != 0:
 				colour = Color(combo.x / greatestValue, combo.y / greatestValue, combo.z / greatestValue)
@@ -150,6 +164,20 @@ func _process(_delta: float) -> void:
 			spell._set_direction(lastDirection)
 			get_parent().add_child(spell)
 			spell.position = $".".global_position
+			var spell_type = spell.type
+			print(spell_type)
+			if(spell_type == "Blue"):
+				spell_sounds.spell_blue_sound()
+			elif(spell_type == "Red"):
+				spell_sounds.spell_red_sound()
+			elif(spell_type == "Green"):
+				spell_sounds.spell_green_sound()
+			elif(spell_type == "Cyan"):
+				spell_sounds.spell_cyan_sound()
+			elif(spell_type == "Magenta"):
+				spell_sounds.spell_magenta_sound()
+			elif(spell_type == "Yellow"):
+				spell_sounds.spell_yellow_sound()
 		else:
 			spellParticles.emitting = true
 		is_casting_spell = not is_casting_spell
@@ -191,3 +219,19 @@ func enemy_attack():
 
 func _on_attack_cooldown_timer_timeout() -> void:
 	enemyAttackCooldown = true
+
+		
+##Function to get the pause menu to show when player hits escape
+func pauseMenu():
+	if paused:
+		background_sounds.play()
+		pause_menu.hide()
+		Engine.time_scale = 1
+	else:
+		background_sounds.stop()
+		pause_menu.show()
+		Engine.time_scale = 0
+		
+	paused = !paused
+	pass
+	

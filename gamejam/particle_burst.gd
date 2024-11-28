@@ -15,6 +15,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if hasCollided:
 		return
+
 	var overlapping_bodies = area.get_overlapping_bodies()
 	for body in overlapping_bodies:
 		if body is TileMapLayer:
