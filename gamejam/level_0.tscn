@@ -1401,6 +1401,7 @@ shape = SubResource("RectangleShape2D_3bt27")
 
 [node name="Player#SpellParticles" type="GPUParticles2D" parent="."]
 position = Vector2(-1, -16)
+emitting = false
 process_material = SubResource("ParticleProcessMaterial_jtdni")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -1414,6 +1415,7 @@ collision_layer = 71
 limit_smoothed = true
 
 [node name="PauseMenu" parent="Player/Camera2D" instance=ExtResource("38_o8qo6")]
+z_index = 10
 offset_left = -50.0
 offset_top = -112.0
 offset_right = -50.0
@@ -1425,9 +1427,9 @@ emitting = false
 process_material = SubResource("ParticleProcessMaterial_jtdni")
 
 [node name="HealthBar_CanvasLayer" type="CanvasLayer" parent="."]
+layer = 100
 
 [node name="PlayerHealthBar" type="TextureProgressBar" parent="HealthBar_CanvasLayer" node_paths=PackedStringArray("player")]
-visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 max_value = 30.0
