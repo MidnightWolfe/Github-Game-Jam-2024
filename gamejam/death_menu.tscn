@@ -20,6 +20,7 @@ offset_top = 259.0
 offset_right = 663.0
 offset_bottom = 297.0
 theme = ExtResource("1_24iem")
+theme_override_fonts/font = ExtResource("3_ib81h")
 text = "RETRY"
 
 [node name="Main Menu" type="Button" parent="."]
@@ -32,6 +33,7 @@ offset_top = 300.0
 offset_right = 654.936
 offset_bottom = 334.112
 theme = ExtResource("1_24iem")
+theme_override_fonts/font = ExtResource("3_ib81h")
 text = "MAIN MENU"
 
 [node name="Quit" type="Button" parent="."]
@@ -41,6 +43,7 @@ offset_top = 341.0
 offset_right = 663.0
 offset_bottom = 379.0
 theme = ExtResource("1_24iem")
+theme_override_fonts/font = ExtResource("3_ib81h")
 text = "QUIT"
 
 [node name="YouDied" type="RichTextLabel" parent="."]
