@@ -80,6 +80,8 @@ func _physics_process(_delta: float) -> void:
 		health = 0
 		print("Boss has been killed")
 		self.queue_free() #This makes the enemy disappear - there are currently no (death) animations
+		
+		get_tree().change_scene_to_file("res://credits.tscn")
 
 ## This is currently used to determine if the enemy is in the player hitbox
 func enemy():
