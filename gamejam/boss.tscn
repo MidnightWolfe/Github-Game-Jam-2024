@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://boss.gd" id="1_4fwqy"]
 [ext_resource type="Texture2D" uid="uid://c7mhsmpergeuv" path="res://Sprites/boss/attack1.png" id="2_j0llw"]
-[ext_resource type="Texture2D" uid="uid://5gjeqyq1lvx3" path="res://Sprites/boss/idle.png" id="3_xqdbt"]
+[ext_resource type="Texture2D" uid="uid://csm7cuxdskst0" path="res://Sprites/boss/walking.png" id="3_iuhy7"]
 [ext_resource type="Texture2D" uid="uid://b4livlat64fsf" path="res://Sprites/boss/redCollar.png" id="4_t0e7h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tr5ye"]
@@ -49,36 +49,36 @@ region = Rect2(1152, 0, 128, 128)
 atlas = ExtResource("2_j0llw")
 region = Rect2(1280, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_r4q31"]
-atlas = ExtResource("3_xqdbt")
+[sub_resource type="AtlasTexture" id="AtlasTexture_0tyte"]
+atlas = ExtResource("3_iuhy7")
 region = Rect2(0, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nq6uy"]
-atlas = ExtResource("3_xqdbt")
+[sub_resource type="AtlasTexture" id="AtlasTexture_7o6d1"]
+atlas = ExtResource("3_iuhy7")
 region = Rect2(128, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_i3dea"]
-atlas = ExtResource("3_xqdbt")
+[sub_resource type="AtlasTexture" id="AtlasTexture_emmss"]
+atlas = ExtResource("3_iuhy7")
 region = Rect2(256, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gx6li"]
-atlas = ExtResource("3_xqdbt")
+[sub_resource type="AtlasTexture" id="AtlasTexture_irjne"]
+atlas = ExtResource("3_iuhy7")
 region = Rect2(384, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_f36ov"]
-atlas = ExtResource("3_xqdbt")
+[sub_resource type="AtlasTexture" id="AtlasTexture_tyr5l"]
+atlas = ExtResource("3_iuhy7")
 region = Rect2(512, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_na6vd"]
-atlas = ExtResource("3_xqdbt")
+[sub_resource type="AtlasTexture" id="AtlasTexture_041de"]
+atlas = ExtResource("3_iuhy7")
 region = Rect2(640, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_olcxk"]
-atlas = ExtResource("3_xqdbt")
+[sub_resource type="AtlasTexture" id="AtlasTexture_y7mdf"]
+atlas = ExtResource("3_iuhy7")
 region = Rect2(768, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sqpeh"]
-atlas = ExtResource("3_xqdbt")
+[sub_resource type="AtlasTexture" id="AtlasTexture_gibmk"]
+atlas = ExtResource("3_iuhy7")
 region = Rect2(896, 0, 128, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_u5y1d"]
@@ -123,31 +123,31 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_r4q31")
+"texture": SubResource("AtlasTexture_0tyte")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nq6uy")
+"texture": SubResource("AtlasTexture_7o6d1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_i3dea")
+"texture": SubResource("AtlasTexture_emmss")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gx6li")
+"texture": SubResource("AtlasTexture_irjne")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_f36ov")
+"texture": SubResource("AtlasTexture_tyr5l")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_na6vd")
+"texture": SubResource("AtlasTexture_041de")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_olcxk")
+"texture": SubResource("AtlasTexture_y7mdf")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_sqpeh")
+"texture": SubResource("AtlasTexture_gibmk")
 }],
 "loop": true,
-"name": &"idle",
+"name": &"walking",
 "speed": 5.0
 }]
 
@@ -169,7 +169,7 @@ func _process(_delta: float) -> void:
 size = Vector2(110, 168)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_an4cd"]
-radius = 30.0
+radius = 23.0
 
 [node name="Boss" type="CharacterBody2D"]
 position = Vector2(118, 22)
@@ -180,7 +180,7 @@ script = ExtResource("1_4fwqy")
 position = Vector2(1.99999, -39)
 scale = Vector2(1.35356, 1.34638)
 sprite_frames = SubResource("SpriteFrames_u5y1d")
-animation = &"idle"
+animation = &"walking"
 
 [node name="Boss_HitBox" type="Area2D" parent="."]
 collision_layer = 3

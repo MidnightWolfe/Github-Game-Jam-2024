@@ -15,6 +15,7 @@ var speed = 100
 var speedHold = 0
 var gravity = 10
 var direction = -1
+var changeDirection = 1
 var dash = false
 var dashSpeed = 500
 var count = 0
@@ -26,10 +27,13 @@ var IsEnemyAlive = true
 var type = "null"
 
 func _ready() -> void:
-	$Boss_Animation.play("idle")
+	$Boss_Animation.play("walking")
 	enemy_sounds.set_stream(sound)
 
 func _physics_process(_delta: float) -> void:
+	if(direction != changeDirection):
+		changeDirection = changeDirection *-1
+		self.scale.x = self.scale.x * -1
 	if(dash == true):
 		count += 1
 		if(count == 200):
@@ -71,6 +75,7 @@ func _physics_process(_delta: float) -> void:
 		$Collar.texture = greenCollar
 		self.type = "Green"	
 	elif health <= 0 && self.type == "Green":
+		enemy_sounds.play()
 		IsEnemyAlive = false
 		health = 0
 		print("Boss has been killed")
