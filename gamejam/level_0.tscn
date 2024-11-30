@@ -2701,6 +2701,7 @@ offset_left = -50.0
 offset_top = -112.0
 offset_right = -50.0
 offset_bottom = -112.0
+metadata/_edit_use_anchors_ = true
 
 [node name="SpellParticles" type="GPUParticles2D" parent="Player"]
 position = Vector2(-1, -16)
