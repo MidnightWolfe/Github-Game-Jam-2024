@@ -33,7 +33,8 @@ Liam:	Created Sign sprites / triggers.
 	Debugged.
 
 Jannine: Created Enemy sprites.
-	Added movement code / pathing to enemy sprites.
-	Added enemy and player health points.
+	 Added movement code / pathing to enemy sprites.
+	 Added enemy and player health points.
+  	 Added animations to the enemies.
 
  
