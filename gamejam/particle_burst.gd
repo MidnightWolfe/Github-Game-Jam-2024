@@ -18,7 +18,7 @@ func _process(delta: float) -> void:
 
 	var overlapping_bodies = area.get_overlapping_bodies()
 	for body in overlapping_bodies:
-		if body is TileMapLayer:
+		if body is TileMapLayer and body.name == "TileMapLayer":
 			hasCollided = true
 			await get_tree().create_timer(0.1).timeout
 			body.handle_particle_collision(self)
