@@ -9,14 +9,13 @@ var hasCollided = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	particle.emitting = true
-	print("Emmitting")
 	await waitForLifetime()
 	
 #Collision code
 func _process(delta: float) -> void:
 	if hasCollided:
 		return
-	#print("A particle Burst has entered the Area of an object")
+
 	var overlapping_bodies = area.get_overlapping_bodies()
 	for body in overlapping_bodies:
 		if body is TileMapLayer:
