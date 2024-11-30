@@ -157,6 +157,7 @@ func _process(_delta: float) -> void:
 				colour = Color(combo.x / greatestValue, combo.y / greatestValue, combo.z / greatestValue)
 	if Input.is_action_just_pressed("enter"):
 		if is_casting_spell:
+			spellParticles.emitting = false
 			combo = Vector3(0,0,0)
 			var spell = SPELLS.instantiate()
 			spell._set_colour(colour)
@@ -177,7 +178,8 @@ func _process(_delta: float) -> void:
 				spell_sounds.spell_magenta_sound()
 			elif(spell_type == "Yellow"):
 				spell_sounds.spell_yellow_sound()
-			
+		else:
+			spellParticles.emitting = true
 		is_casting_spell = not is_casting_spell
 	
 	spellParticles.modulate = colour

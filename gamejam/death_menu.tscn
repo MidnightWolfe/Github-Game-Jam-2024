@@ -13,49 +13,55 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_syhiw")
 
-[node name="Retry" type="Button" parent="."]
-layout_mode = 0
-offset_left = 508.0
-offset_top = 259.0
-offset_right = 663.0
-offset_bottom = 297.0
-theme = ExtResource("1_24iem")
-theme_override_fonts/font = ExtResource("3_ib81h")
-text = "RETRY"
-
-[node name="Main Menu" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.007
-anchor_bottom = 0.006
-offset_left = 508.0
-offset_top = 300.0
-offset_right = 654.936
-offset_bottom = 334.112
-theme = ExtResource("1_24iem")
-theme_override_fonts/font = ExtResource("3_ib81h")
-text = "MAIN MENU"
-
-[node name="Quit" type="Button" parent="."]
-layout_mode = 0
-offset_left = 508.0
-offset_top = 341.0
-offset_right = 663.0
-offset_bottom = 379.0
-theme = ExtResource("1_24iem")
-theme_override_fonts/font = ExtResource("3_ib81h")
-text = "QUIT"
-
 [node name="YouDied" type="RichTextLabel" parent="."]
-layout_mode = 0
-offset_left = 501.0
-offset_top = 154.0
-offset_right = 670.0
-offset_bottom = 191.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -84.5
+offset_top = 4.0
+offset_right = 84.5
+offset_bottom = 41.0
+grow_horizontal = 2
 theme_override_fonts/normal_font = ExtResource("3_ib81h")
 theme_override_font_sizes/normal_font_size = 32
 text = "YOU DIED!"
 
-[connection signal="pressed" from="Retry" to="." method="_on_retry_pressed"]
-[connection signal="pressed" from="Main Menu" to="." method="_on_main_menu_pressed"]
-[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -77.5
+offset_top = -61.0
+offset_right = 77.5
+offset_bottom = 61.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Retry" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+theme = ExtResource("1_24iem")
+theme_override_fonts/font = ExtResource("3_ib81h")
+text = "RETRY"
+
+[node name="Main Menu" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+theme = ExtResource("1_24iem")
+theme_override_fonts/font = ExtResource("3_ib81h")
+text = "MAIN MENU"
+
+[node name="Quit" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+theme = ExtResource("1_24iem")
+theme_override_fonts/font = ExtResource("3_ib81h")
+text = "QUIT"
+
+[connection signal="pressed" from="VBoxContainer/Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="VBoxContainer/Main Menu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]
