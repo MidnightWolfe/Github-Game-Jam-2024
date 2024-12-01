@@ -31,6 +31,8 @@ func _ready() -> void:
 	enemy_sounds.set_stream(sound)
 
 func _physics_process(_delta: float) -> void:
+	if velocity.x == 0 or velocity.y != 0:
+		direction = -direction
 	if(direction != changeDirection):
 		changeDirection = changeDirection *-1
 		self.scale.x = self.scale.x * -1
@@ -42,8 +44,6 @@ func _physics_process(_delta: float) -> void:
 		if(count == 250):
 			speed = speedHold
 			count = 0
-	if velocity.x == 0 or velocity.y != 0:
-		direction = -direction
 	velocity.x = speed * direction
 	velocity.y += gravity
 	move_and_slide()
