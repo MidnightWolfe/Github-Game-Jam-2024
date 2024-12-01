@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-[gd_scene load_steps=107 format=4 uid="uid://bhnlrrkm28bx1"]
-=======
+
 [gd_scene load_steps=118 format=4 uid="uid://bhnlrrkm28bx1"]
->>>>>>> CompletedGame
 
 [ext_resource type="Texture2D" uid="uid://dnrsmegk57si6" path="res://Sprites/GreyGrass.png" id="1_1fkdb"]
 [ext_resource type="Script" path="res://level_0.gd" id="1_pr364"]
