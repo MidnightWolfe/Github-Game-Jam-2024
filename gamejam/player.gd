@@ -246,7 +246,7 @@ func pauseMenu():
 	else:
 		background_sounds.stop()
 		pause_menu.show()
-		Engine.time_scale = 0
+		Engine.time_scale = 0.00000000000001
 		
 	paused = !paused
 	pass
