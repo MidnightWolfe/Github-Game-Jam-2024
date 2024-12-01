@@ -13,6 +13,7 @@ extends Area2D
 @export var number_of_required_tiles: int = 3
 @onready var tilemap = get_parent().get_parent()
 @onready var collisionShape = $CollisionShape2D
+@onready var DeleteOrigin = get_parent()
 
 
 var rectangleSizeInXY

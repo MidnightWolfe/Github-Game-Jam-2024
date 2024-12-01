@@ -169,7 +169,7 @@ func _process(_delta: float) -> void:
 size = Vector2(110, 168)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_an4cd"]
-radius = 23.0
+radius = 57.0351
 
 [node name="Boss" type="CharacterBody2D"]
 position = Vector2(118, 22)
@@ -191,7 +191,7 @@ position = Vector2(-6, -36)
 shape = SubResource("RectangleShape2D_vl32j")
 
 [node name="Stage_Dectection_Area" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 14)
+position = Vector2(-5, -8)
 shape = SubResource("CircleShape2D_an4cd")
 
 [node name="Attack_Cooldown_Timer" type="Timer" parent="."]

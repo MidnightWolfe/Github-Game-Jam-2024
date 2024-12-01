@@ -3,17 +3,12 @@ extends CharacterBody2D
 
 class_name Player
 
-
 @onready var pause_menu = $Camera2D/PauseMenu
 var paused = false
-
-
 
 signal healthChanged
 
 @export var speed = 200
-
-
 
 ##Basic jump / gravity variables
 var gravity = 10
@@ -38,8 +33,13 @@ const SPELLS = preload("res://spells.tscn")
 var is_casting_spell = false
 var combo = Vector3(0, 0, 0)
 var colour = Color(0, 0, 0)
+var counter = 0
 @onready var spellParticles = $SpellParticles
 @onready var animationPath = $AnimatedSprite2D
+@export var maxMana = 5
+@onready var currentMana = maxMana
+signal manaChanged
+
 
 ##Player Attack/HitBox
 var enemyInAttackRange = false
@@ -47,7 +47,7 @@ var enemyAttackCooldown = true
 #@export var health = 30
 
 @export var maxHealth = 30  #Player currently has 30 hit points (HP)
-@onready var currentHealth: int = maxHealth #Tracking the current health of the player
+@export var currentHealth: int = maxHealth #Tracking the current health of the player
 
 var IsPlayerAlive = true
 
@@ -61,7 +61,7 @@ func _physics_process(_delta):
 	if currentHealth <= 0: #Current Health
 		IsPlayerAlive = false
 		#currentHealth = 0 #Current health
-		print("Player has been killed")
+		#print("Player has been killed")
 		get_tree().change_scene_to_file("res://death_menu.tscn")
 	
 ##Function to get player inputs
@@ -157,6 +157,8 @@ func _process(_delta: float) -> void:
 				colour = Color(combo.x / greatestValue, combo.y / greatestValue, combo.z / greatestValue)
 	if Input.is_action_just_pressed("enter"):
 		if is_casting_spell:
+			currentMana = currentMana - 1
+			manaChanged.emit()
 			spellParticles.emitting = false
 			combo = Vector3(0,0,0)
 			var spell = SPELLS.instantiate()
@@ -178,11 +180,20 @@ func _process(_delta: float) -> void:
 				spell_sounds.spell_magenta_sound()
 			elif(spell_type == "Yellow"):
 				spell_sounds.spell_yellow_sound()
-		else:
+			is_casting_spell = not is_casting_spell
+		elif(currentMana > 0):
 			spellParticles.emitting = true
-		is_casting_spell = not is_casting_spell
+			is_casting_spell = not is_casting_spell
+		
 	
 	spellParticles.modulate = colour
+	
+	if currentMana != 5:
+		counter = counter + 1
+	if counter == 300:
+		counter = 0
+		currentMana = currentMana + 1
+		manaChanged.emit()
 	
 	if is_casting_spell:
 		if Input.is_action_just_pressed("1"):
@@ -214,8 +225,8 @@ func enemy_attack():
 
 		enemyAttackCooldown = false
 		$Attack_Cooldown_Timer.start()
-		print("Player took -5 damage")
-		print(currentHealth)
+		#print("Player took -5 damage")
+		#print(currentHealth)
 
 func _on_attack_cooldown_timer_timeout() -> void:
 	enemyAttackCooldown = true
@@ -230,7 +241,7 @@ func pauseMenu():
 	else:
 		background_sounds.stop()
 		pause_menu.show()
-		Engine.time_scale = 0
+		Engine.time_scale = 0.00000000000001
 		
 	paused = !paused
 	pass
