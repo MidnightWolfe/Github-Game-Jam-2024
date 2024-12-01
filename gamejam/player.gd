@@ -222,6 +222,7 @@ func enemy_attack():
 	if enemyInAttackRange and enemyAttackCooldown == true:
 		currentHealth = currentHealth - 5 #Enemy damage to player
 		healthChanged.emit()
+		movement_sounds.hurt_sound()
 
 		enemyAttackCooldown = false
 		$Attack_Cooldown_Timer.start()

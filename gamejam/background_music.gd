@@ -5,7 +5,7 @@ var background_in_game : AudioStream = preload("res://Audio/One Man Symphony - D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	self.set_stream(background_in_game)
-	self.volume_db = -10
+	self.volume_db = -20
 	play()
 	pass # Replace with function body.
 
