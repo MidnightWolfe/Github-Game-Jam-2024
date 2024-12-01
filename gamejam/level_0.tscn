@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=4 uid="uid://bhnlrrkm28bx1"]
+[gd_scene load_steps=107 format=4 uid="uid://bhnlrrkm28bx1"]
 
 [ext_resource type="Texture2D" uid="uid://dnrsmegk57si6" path="res://Sprites/GreyGrass.png" id="1_1fkdb"]
 [ext_resource type="Script" path="res://level_0.gd" id="1_pr364"]
@@ -39,8 +39,10 @@
 [ext_resource type="Texture2D" uid="uid://dhqhkd1ixm20v" path="res://Sprites/healthfront.png" id="37_7618d"]
 [ext_resource type="PackedScene" uid="uid://che76syghnp7j" path="res://pause_menu.tscn" id="38_o8qo6"]
 [ext_resource type="Script" path="res://movement_sounds.gd" id="38_t2ds0"]
+[ext_resource type="Texture2D" uid="uid://dgnahdplysggm" path="res://Sprites/manafront.png" id="39_b8yjr"]
 [ext_resource type="Script" path="res://background_music.gd" id="39_ncqgp"]
 [ext_resource type="Script" path="res://spell_sounds.gd" id="40_mu761"]
+[ext_resource type="Script" path="res://player_mana_bar.gd" id="41_3d2aw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ymt2q"]
 texture = ExtResource("9_1882d")
@@ -2719,6 +2721,19 @@ value = 30.0
 texture_under = ExtResource("36_rly6i")
 texture_progress = ExtResource("37_7618d")
 script = ExtResource("11_eq2cp")
+player = NodePath("../../Player")
+
+[node name="ManaBar_CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PlayerManaBar" type="TextureProgressBar" parent="ManaBar_CanvasLayer" node_paths=PackedStringArray("player")]
+offset_top = 33.0
+offset_right = 155.0
+offset_bottom = 73.0
+max_value = 5.0
+value = 5.0
+texture_under = ExtResource("36_rly6i")
+texture_progress = ExtResource("39_b8yjr")
+script = ExtResource("41_3d2aw")
 player = NodePath("../../Player")
 
 [node name="movement_sounds" type="AudioStreamPlayer2D" parent="."]

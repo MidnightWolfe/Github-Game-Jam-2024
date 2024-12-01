@@ -38,8 +38,13 @@ const SPELLS = preload("res://spells.tscn")
 var is_casting_spell = false
 var combo = Vector3(0, 0, 0)
 var colour = Color(0, 0, 0)
+var counter = 0
 @onready var spellParticles = $SpellParticles
 @onready var animationPath = $AnimatedSprite2D
+@export var maxMana = 5
+@onready var currentMana = maxMana
+signal manaChanged
+
 
 ##Player Attack/HitBox
 var enemyInAttackRange = false
@@ -157,6 +162,8 @@ func _process(_delta: float) -> void:
 				colour = Color(combo.x / greatestValue, combo.y / greatestValue, combo.z / greatestValue)
 	if Input.is_action_just_pressed("enter"):
 		if is_casting_spell:
+			currentMana = currentMana - 1
+			manaChanged.emit()
 			spellParticles.emitting = false
 			combo = Vector3(0,0,0)
 			var spell = SPELLS.instantiate()
@@ -178,11 +185,20 @@ func _process(_delta: float) -> void:
 				spell_sounds.spell_magenta_sound()
 			elif(spell_type == "Yellow"):
 				spell_sounds.spell_yellow_sound()
-		else:
+			is_casting_spell = not is_casting_spell
+		elif(currentMana > 0):
 			spellParticles.emitting = true
-		is_casting_spell = not is_casting_spell
+			is_casting_spell = not is_casting_spell
+		
 	
 	spellParticles.modulate = colour
+	
+	if currentMana != 5:
+		counter = counter + 1
+	if counter == 300:
+		counter = 0
+		currentMana = currentMana + 1
+		manaChanged.emit()
 	
 	if is_casting_spell:
 		if Input.is_action_just_pressed("1"):
