@@ -190,7 +190,7 @@ func _process(_delta: float) -> void:
 	
 	if currentMana != 5:
 		counter = counter + 1
-	if counter == 300:
+	if counter == 250:
 		counter = 0
 		currentMana = currentMana + 1
 		manaChanged.emit()

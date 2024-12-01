@@ -3385,6 +3385,8 @@ player = NodePath("../../Player")
 
 [node name="movement_sounds" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
+max_distance = 1e+07
+attenuation = 1e-05
 script = ExtResource("38_t2ds0")
 
 [node name="background_music" type="AudioStreamPlayer2D" parent="."]
@@ -3395,6 +3397,8 @@ script = ExtResource("39_ncqgp")
 
 [node name="spell_sounds" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
+max_distance = 1e+07
+attenuation = 1e-05
 script = ExtResource("40_mu761")
 
 [connection signal="area_entered" from="Signs/SignTemplate/Readable_Area" to="Signs/SignTemplate" method="_on_area_2d_area_entered"]
