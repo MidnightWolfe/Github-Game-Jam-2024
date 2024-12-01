@@ -24,6 +24,8 @@ Markus: Created combat / spell system.
 	Created the combat controls. 
 	Created Spell sprites / animations.
 	Fixed how Enemy sprites on spawned into world.
+	Created mana system
+	Added healing system
 	Debugged.
 
 Liam:	Created Sign sprites / triggers.
