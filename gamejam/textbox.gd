@@ -48,7 +48,7 @@ func _process(_delta: float) -> void:
 				finished = true
 			pass
 		State.READING:
-			if Input.is_action_just_pressed("enter"):
+			if Input.is_action_just_pressed("down"):
 				text_on_screen.visible_characters = -1
 				change_state(State.READY)
 			pass

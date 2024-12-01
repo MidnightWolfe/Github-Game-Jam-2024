@@ -3,17 +3,12 @@ extends CharacterBody2D
 
 class_name Player
 
-
 @onready var pause_menu = $Camera2D/PauseMenu
 var paused = false
-
-
 
 signal healthChanged
 
 @export var speed = 200
-
-
 
 ##Basic jump / gravity variables
 var gravity = 10
@@ -66,7 +61,7 @@ func _physics_process(_delta):
 	if currentHealth <= 0: #Current Health
 		IsPlayerAlive = false
 		#currentHealth = 0 #Current health
-		print("Player has been killed")
+		#print("Player has been killed")
 		get_tree().change_scene_to_file("res://death_menu.tscn")
 	
 ##Function to get player inputs
@@ -230,8 +225,8 @@ func enemy_attack():
 
 		enemyAttackCooldown = false
 		$Attack_Cooldown_Timer.start()
-		print("Player took -5 damage")
-		print(currentHealth)
+		#print("Player took -5 damage")
+		#print(currentHealth)
 
 func _on_attack_cooldown_timer_timeout() -> void:
 	enemyAttackCooldown = true
