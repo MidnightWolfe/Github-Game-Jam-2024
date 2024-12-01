@@ -6,6 +6,8 @@ extends CharacterBody2D
 @onready var enemy_sounds = %enemy_sounds
 var sound : AudioStream = preload("res://Audio/enemy_sound.wav")
 
+@onready var player = get_node("/root/Level_0/Player")
+
 var speed = 100
 var gravity = 10
 var direction = -1
@@ -27,6 +29,9 @@ func _physics_process(_delta: float) -> void:
 	velocity.y += gravity
 	move_and_slide()
 	if health <= 0:
+		if player.currentHealth != player.maxHealth:
+			player.currentHealth += 5
+			player.healthChanged.emit()
 		IsEnemyAlive = false
 		health = 0
 		print("Enemy has been killed")

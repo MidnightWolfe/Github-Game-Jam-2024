@@ -52,7 +52,7 @@ var enemyAttackCooldown = true
 #@export var health = 30
 
 @export var maxHealth = 30  #Player currently has 30 hit points (HP)
-@onready var currentHealth: int = maxHealth #Tracking the current health of the player
+@export var currentHealth: int = maxHealth #Tracking the current health of the player
 
 var IsPlayerAlive = true
 

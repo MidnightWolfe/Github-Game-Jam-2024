@@ -1,5 +1,4 @@
-
-[gd_scene load_steps=118 format=4 uid="uid://bhnlrrkm28bx1"]
+[gd_scene load_steps=120 format=4 uid="uid://bhnlrrkm28bx1"]
 
 [ext_resource type="Texture2D" uid="uid://dnrsmegk57si6" path="res://Sprites/GreyGrass.png" id="1_1fkdb"]
 [ext_resource type="Script" path="res://level_0.gd" id="1_pr364"]
@@ -3390,6 +3389,8 @@ script = ExtResource("38_t2ds0")
 
 [node name="background_music" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
+max_distance = 1e+07
+attenuation = 1e-05
 script = ExtResource("39_ncqgp")
 
 [node name="spell_sounds" type="AudioStreamPlayer2D" parent="."]
