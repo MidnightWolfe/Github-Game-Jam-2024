@@ -4,7 +4,7 @@
 	# https://www.youtube.com/watch?v=24hXJnwRim0
 extends CharacterBody2D
 @onready var enemy_sounds = %enemy_sounds
-var sound : AudioStream = preload("res://Audio/enemy_sound.wav")
+var sound : AudioStream = preload("res://Audio/enemy_hurt.wav")
 
 @onready var player = get_node("/root/Level_0/Player")
 

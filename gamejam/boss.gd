@@ -4,7 +4,7 @@
 	# https://www.youtube.com/watch?v=24hXJnwRim0
 extends CharacterBody2D
 @onready var enemy_sounds = %Boss_sounds
-var sound : AudioStream = preload("res://Audio/bossSound.mp3")
+var sound : AudioStream = preload("res://Audio/boss_hurt.wav")
 var blueCollar = preload("res://Sprites/boss/blueCollar.png")
 var yellowCollar = preload("res://Sprites/boss/yellowCollar.png")
 var cyanCollar = preload("res://Sprites/boss/cyanCollar.png")

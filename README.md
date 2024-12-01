@@ -7,7 +7,7 @@ Kaiya:  Created Player sprite and animations.
 	Created restart on death.
 	Created / Designed / Coded all menus (and buttons).
 	Created Font and themes used on the menus.
-	Added some sounds.
+	Added sounds / music.
 	Managed Repo / Debugged.
 
 Ryan:   Created / Designed Level / TileMap.
@@ -16,6 +16,7 @@ Ryan:   Created / Designed Level / TileMap.
 	Added World / Level Painting.
 	Updated the spell particle effect animation (splashs on hit).
 	Placed Enemy locations.
+	Found / created sounds / music.
 	Debugged.
 
 Markus: Created combat / spell system.
@@ -29,7 +30,7 @@ Markus: Created combat / spell system.
 	Debugged.
 
 Liam:	Created Sign sprites / triggers.
-	Added Sound effects to various parts (some menus, enemies, player, etc.).
+	Added Sound effects to various parts (some menus, enemies, player, etc.). (Not used)
 	Created / Coded Boss.
 	Animated Boss.
 	Debugged.

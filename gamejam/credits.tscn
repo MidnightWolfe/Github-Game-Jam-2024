@@ -69,7 +69,11 @@ text = "																										THANK YOU FOR PLAYING!
 																										MUSIC FROM:
 																	
 
-																															PLACEHOLDER"
+																															
+
+Hyperfine Timekeeping  - Composed by One Man Symphony - https://onemansymphony.bandcamp.com/
+
+Sound Effects From https://sfxr.me/"
 
 [node name="MainMenuAudio" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
