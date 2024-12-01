@@ -1,6 +1,6 @@
 extends AudioStreamPlayer2D
-var jump : AudioStream = preload("res://Audio/jump.mp3")
-var dash : AudioStream = preload("res://Audio/dash.mp3")
+var jump : AudioStream = preload("res://Audio/jump2.wav")
+var dash : AudioStream = preload("res://Audio/dash2.wav")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

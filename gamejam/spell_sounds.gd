@@ -1,10 +1,10 @@
 extends AudioStreamPlayer2D
-var spell_red : AudioStream = preload("res://Audio/red_spell.mp3")
-var spell_green : AudioStream = preload("res://Audio/green_spell.mp3")
-var spell_blue : AudioStream = preload("res://Audio/blue_spell.mp3")
-var spell_cyan : AudioStream = preload("res://Audio/cyan_spell.mp3")
-var spell_magenta : AudioStream = preload("res://Audio/magenta_spell.mp3")
-var spell_yellow : AudioStream = preload("res://Audio/yellow_spell.mp3")
+var spell_red : AudioStream = preload("res://Audio/red_spell.wav")
+var spell_green : AudioStream = preload("res://Audio/green_spell.wav")
+var spell_blue : AudioStream = preload("res://Audio/blue_spell.wav")
+var spell_cyan : AudioStream = preload("res://Audio/cyan_spell.wav")
+var spell_magenta : AudioStream = preload("res://Audio/mag_spell.wav")
+var spell_yellow : AudioStream = preload("res://Audio/yellow_spell.wav")
 
 func spell_red_sound() -> void:
 	self.volume_db = -5

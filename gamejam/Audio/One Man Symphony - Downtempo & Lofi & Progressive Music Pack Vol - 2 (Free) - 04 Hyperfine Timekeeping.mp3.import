@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b78tpyhe1vgap"
+path="res://.godot/imported/One Man Symphony - Downtempo & Lofi & Progressive Music Pack Vol - 2 (Free) - 04 Hyperfine Timekeeping.mp3-8845317d7f57f085b73a1ecb4d118bfe.mp3str"
+
+[deps]
+
+source_file="res://Audio/One Man Symphony - Downtempo & Lofi & Progressive Music Pack Vol - 2 (Free) - 04 Hyperfine Timekeeping.mp3"
+dest_files=["res://.godot/imported/One Man Symphony - Downtempo & Lofi & Progressive Music Pack Vol - 2 (Free) - 04 Hyperfine Timekeeping.mp3-8845317d7f57f085b73a1ecb4d118bfe.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
